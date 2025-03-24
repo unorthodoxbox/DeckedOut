@@ -23,13 +23,9 @@ public class CardObject : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Colliding with player");
             cardData.ApplyEffect(other.GetComponent<EntityStats>());
             Destroy(cardInstance);
             Destroy(this);
-        } else
-        {
-            Debug.Log("Colliding with object other than player");
         }
     }
 

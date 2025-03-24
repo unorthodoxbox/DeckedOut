@@ -15,7 +15,7 @@ MonoBehaviour:
   cardName: SpeedBoost
   description: Boost Base Move Speed
   icon: {fileID: 0}
-  statType: 1
+  statType: 0
   value: 1
   isMultiplicative: 0
   stacksMultiplicatively: 0

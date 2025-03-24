@@ -14,13 +14,13 @@ public class StatCard : Card
 
         switch (statType)
         {
-            case StatType.Health:
-                ApplyStat(ref entity.health);
+            case StatType.maxHealth:
+                ApplyStat(ref entity.maxHealth);
                 break;
-            case StatType.Speed:
+            case StatType.moveSpeed:
                 ApplyStat(ref entity.moveSpeed);
                 break;
-            case StatType.Damage:
+            case StatType.attackDamage:
                 ApplyStat(ref entity.attackDamage);
                 break;
             /*
@@ -29,6 +29,7 @@ public class StatCard : Card
                 break;
             */
         }
+        entity.RefreshStats();
     }
 
     private void ApplyStat(ref float stat)

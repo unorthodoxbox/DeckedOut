@@ -1,7 +1,10 @@
 public enum StatType
 {
-    Health,
-    Speed,
-    Damage,
-    Defense
+    moveSpeed,
+    jumpHeight,
+
+    attackSpeed,
+    attackDamage,
+
+    maxHealth
 }

@@ -4,11 +4,8 @@ using UnityEngine.InputSystem;
 public class ThirdPersonController : MonoBehaviour
 {
     private EntityStats playerStats;
+
     [Header("Movement Settings")]
-    public float walkSpeed = 3f;
-    public float sprintSpeed = 6f;
-    public float crouchSpeed = 2f;
-    public float jumpHeight = 2f; // Jump height
     public float gravity = -9.81f; // Gravity force
 
     [Header("Camera Settings")]
@@ -44,6 +41,7 @@ public class ThirdPersonController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        playerStats.RefreshStats();
     }
 
     void Update()
@@ -64,11 +62,11 @@ public class ThirdPersonController : MonoBehaviour
         moveDirection.y = 0f;
 
         if (sprintAction.IsPressed() && !isCrouching)
-            currentSpeed = sprintSpeed;
+            currentSpeed = playerStats.sprintSpeed;
         else if (isCrouching)
-            currentSpeed = crouchSpeed;
+            currentSpeed = playerStats.crouchSpeed;
         else
-            currentSpeed = walkSpeed;
+            currentSpeed = playerStats.walkSpeed;
 
         if (isGrounded && velocity.y < 0)
         {
@@ -78,7 +76,7 @@ public class ThirdPersonController : MonoBehaviour
         // Jumping logic
         if (jumpAction.triggered && isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity); // Jump formula
+            velocity.y = Mathf.Sqrt(playerStats.jumpHeight * -2f * gravity); // Jump formula
         }
 
         // Apply gravity
