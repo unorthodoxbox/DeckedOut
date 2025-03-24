@@ -5,7 +5,7 @@ public class SpeedBoostCard : Card
 {
     public float speedIncrease;
 
-    public override void ApplyEffect(PlayerStats player)
+    public override void ApplyEffect(EntityStats player)
     {
         player.moveSpeed += speedIncrease;
     }

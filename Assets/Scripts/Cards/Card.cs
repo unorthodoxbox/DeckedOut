@@ -6,5 +6,5 @@ public abstract class Card : ScriptableObject
     public string description;
 
     // Method to apply card effects
-    public abstract void ApplyEffect(PlayerStats player);
+    public abstract void ApplyEffect(EntityStats player);
 }   

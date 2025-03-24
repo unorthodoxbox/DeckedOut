@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class ThirdPersonController : MonoBehaviour
 {
+    private EntityStats playerStats;
     [Header("Movement Settings")]
     public float walkSpeed = 3f;
     public float sprintSpeed = 6f;
@@ -32,6 +33,7 @@ public class ThirdPersonController : MonoBehaviour
 
     void Awake()
     {
+        playerStats = GetComponent<EntityStats>(); // Get PlayerStats on the same object
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
 

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+public class EntityStats : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float attackDamage = 10f;
