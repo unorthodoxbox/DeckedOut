@@ -26,9 +26,13 @@ public class ThirdPersonController : MonoBehaviour
     private InputAction sprintAction;
     private InputAction jumpAction; // Jump action
     private InputAction lookAction;
+    //private InputAction clickAction;
 
     private float yaw;
     private float pitch;
+
+    public GameObject bullet;
+    public GameObject gun;
 
     void Awake()
     {
@@ -39,6 +43,8 @@ public class ThirdPersonController : MonoBehaviour
         sprintAction = playerInput.actions["Sprint"];
         jumpAction = playerInput.actions["Jump"]; // Set the Jump action
         lookAction = playerInput.actions["Look"];
+
+        //clickAction = playerInput.actions["Attack"];
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
