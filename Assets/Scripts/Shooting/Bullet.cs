@@ -4,7 +4,6 @@ public class Bullet : MonoBehaviour
 {
 
     private float damage = 0f;
-    private float speed = 20f;
     private Rigidbody rb;
 
     void Awake()
@@ -24,7 +23,6 @@ public class Bullet : MonoBehaviour
     {
         gameObject.tag = tag;
         this.damage = damage;
-        this.speed = speed;
 
         // Move the bullet using Rigidbody physics
         rb.linearVelocity = direction * speed;

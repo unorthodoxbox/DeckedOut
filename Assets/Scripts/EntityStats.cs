@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EntityStats : MonoBehaviour
 {
@@ -27,8 +28,12 @@ public class EntityStats : MonoBehaviour
     public float bulletSpeed = 20f;
 
     [Header("Body Settings")]
-    public float maxHealth = 100f;
+    public float maxHealth = 50f;
     public float currHealth = 100f;
+
+    [Header("UI Settings")]
+    [SerializeField]
+    public HealthBar healthBar;
 
     public void Awake()
     {
@@ -49,6 +54,17 @@ public class EntityStats : MonoBehaviour
         if (currHealth <= 0)
         {
             die();
+        }
+        UpdateHealthBar();
+
+    }
+
+    private void UpdateHealthBar()
+    {
+        // Update health bar fill based on current health
+        if (healthBar != null)
+        {
+            healthBar.SetHealth((int)currHealth);
         }
     }
 
