@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardData: {fileID: 0}
+  cardPrefab: {fileID: 2361516283692694863, guid: 80f9d010e0765df4e98b1304291fe565, type: 3}

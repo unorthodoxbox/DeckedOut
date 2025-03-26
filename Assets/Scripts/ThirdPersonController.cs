@@ -29,8 +29,12 @@ public class ThirdPersonController : MonoBehaviour
     private float yaw;
     private float pitch;
 
-    public GameObject bullet;
-    public GameObject gun;
+    [Header("Weapon Settings")]
+    [SerializeField]
+    private GameObject bullet;
+    [SerializeField]
+    private GameObject gun;
+    private float lastAttackTime = 0f;  // Stores when the last attack happened
 
     void Awake()
     {
@@ -55,6 +59,7 @@ public class ThirdPersonController : MonoBehaviour
         HandleMovement();
         HandleCameraRotation();
         CameraFollow();
+        HandleAttacking();
     }
 
     void HandleMovement()
@@ -68,11 +73,20 @@ public class ThirdPersonController : MonoBehaviour
         moveDirection.y = 0f;
 
         if (sprintAction.IsPressed() && !isCrouching)
+        {
+            Debug.Log("Sprinting");
             currentSpeed = playerStats.sprintSpeed;
+        }
         else if (isCrouching)
+        {
+            Debug.Log("Crouching");
             currentSpeed = playerStats.crouchSpeed;
+        }
         else
+        {
             currentSpeed = playerStats.walkSpeed;
+        }
+            
 
         if (isGrounded && velocity.y < 0)
         {
@@ -105,5 +119,31 @@ public class ThirdPersonController : MonoBehaviour
     {
         cameraTransform.position = transform.position + Quaternion.Euler(0, yaw, 0) * cameraOffset;
         cameraTransform.rotation = Quaternion.Euler(pitch, yaw, 0f);
+    }
+
+    void HandleAttacking()
+    {
+        float attackCooldown = 1f / playerStats.attackSpeed;    // Cooldown in seconds
+        if (Input.GetMouseButton(0) && Time.time >= lastAttackTime + attackCooldown)
+        {
+            lastAttackTime = Time.time;  // Update last attack time
+            // Set spawn position and correct rotation
+            Vector3 gunPos = gun.transform.position;
+            Quaternion gunRot = cameraTransform.rotation; // Use the camera's rotation
+
+            // Spawn bullet
+            GameObject currentBullet = Instantiate(bullet, gunPos, gunRot);
+
+            // Calculate shooting direction (forward from camera)
+            Vector3 shootDirection = cameraTransform.forward.normalized;
+
+            // Initialize bullet variables
+            currentBullet.GetComponent<Bullet>().InitializeVariables(
+                this.gameObject.tag,
+                playerStats.attackDamage,
+                playerStats.bulletSpeed,
+                shootDirection
+            );
+        }
     }
 }
