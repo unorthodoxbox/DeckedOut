@@ -124,8 +124,10 @@ public class ThirdPersonController : MonoBehaviour
     void HandleAttacking()
     {
         float attackCooldown = 1f / playerStats.attackSpeed;    // Cooldown in seconds
-        if (Input.GetMouseButton(0) && Time.time >= lastAttackTime + attackCooldown)
+        if (Input.GetMouseButton(0) && Time.time >= lastAttackTime + attackCooldown && playerStats.ammoInGun > 0)
         {
+            playerStats.ammoInGun--; //Reduces player ammo
+
             lastAttackTime = Time.time;  // Update last attack time
             // Set spawn position and correct rotation
             Vector3 gunPos = gun.transform.position;
@@ -144,6 +146,22 @@ public class ThirdPersonController : MonoBehaviour
                 playerStats.bulletSpeed,
                 shootDirection
             );
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && playerStats.totalAmmo > 0) {
+            if (playerStats.totalAmmo >= 30) {
+
+            }
+            float temp = playerStats.clipSize - playerStats.ammoInGun;
+
+            if (playerStats.totalAmmo >= temp) {
+                playerStats.ammoInGun += temp;
+                playerStats.totalAmmo -= temp;
+            } else 
+            {
+                playerStats.ammoInGun += playerStats.totalAmmo;
+                playerStats.totalAmmo = 0;
+            }
         }
     }
 }

@@ -26,6 +26,9 @@ public class EntityStats : MonoBehaviour
     public float attackDamage = 10f;
     public float attackSpeed = 5f; // Number of attacks per second
     public float bulletSpeed = 20f;
+    public float clipSize = 30f;
+    public float totalAmmo = 90f;
+    public float ammoInGun = 30f;
 
     [Header("Body Settings")]
     public float maxHealth = 50f;
