@@ -34,7 +34,12 @@ public class ThirdPersonController : MonoBehaviour
     private GameObject bullet;
     [SerializeField]
     private GameObject gun;
+    [SerializeField]
+    private GameObject secondGun;
+
+    private int currentGunCount = 1; //Weapon wheel: 0 = empty hand, 1 = main gun, 2 = secondary gun
     private float lastAttackTime = 0f;  // Stores when the last attack happened
+    private bool mainGunEquipped = true;
 
     void Awake()
     {
@@ -52,6 +57,8 @@ public class ThirdPersonController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         playerStats.RefreshStats();
+
+        secondGun.SetActive(false);
     }
 
     void Update()
@@ -60,6 +67,7 @@ public class ThirdPersonController : MonoBehaviour
         HandleCameraRotation();
         CameraFollow();
         HandleAttacking();
+        WeaponEquip();
     }
 
     void HandleMovement()
@@ -124,7 +132,7 @@ public class ThirdPersonController : MonoBehaviour
     void HandleAttacking()
     {
         float attackCooldown = 1f / playerStats.attackSpeed;    // Cooldown in seconds
-        if (Input.GetMouseButton(0) && Time.time >= lastAttackTime + attackCooldown && playerStats.ammoInGun > 0)
+        if (Input.GetMouseButton(0) && Time.time >= lastAttackTime + attackCooldown && playerStats.ammoInGun > 0 && mainGunEquipped)
         {
             playerStats.ammoInGun--; //Reduces player ammo
 
@@ -148,6 +156,7 @@ public class ThirdPersonController : MonoBehaviour
             );
         }
 
+        //Handles reload from totalAmmo
         if (Input.GetKeyDown(KeyCode.E) && playerStats.totalAmmo > 0) {
             if (playerStats.totalAmmo >= 30) {
 
@@ -164,4 +173,62 @@ public class ThirdPersonController : MonoBehaviour
             }
         }
     }
+    void WeaponEquip() {
+        bool pressedC = Input.GetKeyDown(KeyCode.C);
+
+        //Equips main gun
+        if (pressedC && currentGunCount == 0) {
+            gun.SetActive(true);
+            pressedC = false;
+            mainGunEquipped = true;
+            currentGunCount = 1;
+            Debug.Log("CurrentGunCount: 1");
+        }
+
+        //Equips secondary gun
+        if (pressedC && currentGunCount == 1) {
+            gun.SetActive(false);
+            secondGun.SetActive(true);
+            pressedC = false;
+            mainGunEquipped = true;
+            currentGunCount = 2;
+            Debug.Log("CurrentGunCount: 2");
+        }
+        
+        //Dequips guns
+        if (pressedC && currentGunCount == 2) {
+            secondGun.SetActive(false);
+            //Debug.Log("inSetActive");
+            pressedC = false;
+            mainGunEquipped = false;
+            currentGunCount = 0;
+            Debug.Log("CurrentGunCount: 0");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        //Handles collisions with types of ammo crates
+        if (other.gameObject.tag == "AmmoCrateSmall") {
+            playerStats.totalAmmo += 10;
+            if (playerStats.totalAmmo > playerStats.maxClipSize) {
+                playerStats.totalAmmo = playerStats.maxClipSize;
+            }
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.tag == "AmmoCrateMed") {
+            playerStats.totalAmmo += 20;
+            if (playerStats.totalAmmo > playerStats.maxClipSize) {
+                playerStats.totalAmmo = playerStats.maxClipSize;
+            }
+            Destroy(other.gameObject);
+        }
+        if (other.gameObject.tag == "AmmoCrateBig") {
+            playerStats.totalAmmo += 30;
+            if (playerStats.totalAmmo > playerStats.maxClipSize) {
+                playerStats.totalAmmo = playerStats.maxClipSize;
+            }
+            Destroy(other.gameObject);
+        }
+    }
+
 }

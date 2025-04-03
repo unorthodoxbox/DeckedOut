@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Card
   - Enemy
+  - AmmoCrateSmall
+  - AmmoCrateMed
+  - AmmoCrateBig
   layers:
   - Default
   - TransparentFX
