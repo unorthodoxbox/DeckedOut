@@ -62,23 +62,37 @@ public class LightingController : MonoBehaviour
     {
         if (skyboxMaterial != null)
         {
-            if (timePercent >= 0.125 && timePercent <= 0.25) //dawn transitions
+            if (timePercent >= 0.1875 && timePercent <= 0.3125) //dawn transitions
             {
-                float lerpValue = Mathf.InverseLerp(0.125f, 0.25f, timePercent);
+                //0.158 - 0.221
+                //if (timePercent >= 0.158 && timePercent <= 0.221)
+                //{
+                //    float slowLerp = Mathf.InverseLerp(0.158, 0.221, timePercent);
+                //    float slowThickness = Mathf.Lerp(nightAtmosphereThickness, dayAtmosphereThickness, slowLerp);
+                //    skyboxMaterial.SetFloat("_AtmosphereThickness", slowThickness);
+                //}
+                float lerpValue = Mathf.InverseLerp(0.1875f, 0.3125f, timePercent);
                 float thickness = Mathf.Lerp(nightAtmosphereThickness, dayAtmosphereThickness, lerpValue);
                 skyboxMaterial.SetFloat("_AtmosphereThickness", thickness);
             }
-            else if (timePercent >= 0.75 && timePercent <= 0.875) //dusk transitions
+            else if (timePercent >= 0.6875 && timePercent <= 0.8125) //dusk transitions
             {
-                float lerpValue = Mathf.InverseLerp(0.75f, 0.875f, timePercent);
+                //0.779 - 0.841
+                //if (timePercent >= 0.779 && timePercent <= 0.841)
+                //{
+                //    float slowLerp = Mathf.InverseLerp(0.779, 0.841, timePercent);
+                //    float slowThickness = Mathf.Lerp(nightAtmosphereThickness, dayAtmosphereThickness, slowLerp);
+                //    skyboxMaterial.SetFloat("_AtmosphereThickness", slowThickness);
+                //}
+                float lerpValue = Mathf.InverseLerp(0.6875f, 0.8125f, timePercent);
                 float thickness = Mathf.Lerp(dayAtmosphereThickness, nightAtmosphereThickness, lerpValue);
                 skyboxMaterial.SetFloat("_AtmosphereThickness", thickness);
             }
-            else if (timePercent > 0.25 && timePercent < 0.75) //day
+            else if (timePercent > 0.3125 && timePercent < 0.6875) //day
             {
                 skyboxMaterial.SetFloat("_AtmosphereThickness", dayAtmosphereThickness);
             }
-            else if (timePercent < 0.125 || timePercent > 0.875) //night
+            else if (timePercent < 0.1875 || timePercent > 0.8125) //night
             {
                 skyboxMaterial.SetFloat("_AtmosphereThickness", nightAtmosphereThickness);
             }
