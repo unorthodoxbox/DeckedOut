@@ -66,13 +66,13 @@ public class LightingController : MonoBehaviour
             {
                 float lerpValue = Mathf.InverseLerp(0.125f, 0.25f, timePercent);
                 float thickness = Mathf.Lerp(nightAtmosphereThickness, dayAtmosphereThickness, lerpValue);
-                skyboxMaterial.SetFloat("_AtmosphereThicnkess", thickness);
+                skyboxMaterial.SetFloat("_AtmosphereThickness", thickness);
             }
             else if (timePercent >= 0.75 && timePercent <= 0.875) //dusk transitions
             {
                 float lerpValue = Mathf.InverseLerp(0.75f, 0.875f, timePercent);
                 float thickness = Mathf.Lerp(dayAtmosphereThickness, nightAtmosphereThickness, lerpValue);
-                skyboxMaterial.SetFloat("_AtmosphereThicnkess", thickness);
+                skyboxMaterial.SetFloat("_AtmosphereThickness", thickness);
             }
             else if (timePercent > 0.25 && timePercent < 0.75) //day
             {
