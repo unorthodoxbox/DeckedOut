@@ -1,0 +1,18 @@
+Thank you for buying and downloarding this package. The use is very simpe.
+
+- The prefab can be found in the folder "_Prefabs". 
+- The beelte is equiped with 6 colored Materials. You can give it your own color by simply changing the material color!
+- The materials can be found in the folder "_Material"
+- The beetle has 9 different animations! Among others: dying, 3 different attacks and idle!
+- You can find the Animations in the folder "Animationclips".
+- The Folder "_Animator" contains a simple animator, which plays all animations on after the other.
+
+
+Do you have any suggestions, tips or problems? Or would you like to give your game your very own look? No problem! Just contact me or place an order on:
+
+https://www.fantasyhavenassets.com/
+
+or 
+
+write me directly an e-mail:
+ronja@fantasyhavenassets.com
