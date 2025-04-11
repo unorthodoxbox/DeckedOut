@@ -36,6 +36,8 @@ public class ThirdPersonController : MonoBehaviour
     private GameObject gun;
     [SerializeField]
     private GameObject secondGun;
+    [SerializeField]
+    private GameObject crowbar;
 
     private int currentGunCount = 1; //Weapon wheel: 0 = empty hand, 1 = main gun, 2 = secondary gun
     private float lastAttackTime = 0f;  // Stores when the last attack happened
@@ -59,6 +61,7 @@ public class ThirdPersonController : MonoBehaviour
         playerStats.RefreshStats();
 
         secondGun.SetActive(false);
+        crowbar.SetActive(false);
     }
 
     void Update()
@@ -132,9 +135,13 @@ public class ThirdPersonController : MonoBehaviour
     void HandleAttacking()
     {
         float attackCooldown = 1f / playerStats.attackSpeed;    // Cooldown in seconds
+
+        
         if (Input.GetMouseButton(0) && Time.time >= lastAttackTime + attackCooldown && playerStats.ammoInGun > 0 && mainGunEquipped)
         {
-            playerStats.ammoInGun--; //Reduces player ammo
+            if (currentGunCount == 1) {
+                playerStats.ammoInGun--; //Reduces player ammo unless player is using pistol
+            }
 
             lastAttackTime = Time.time;  // Update last attack time
             // Set spawn position and correct rotation
@@ -154,12 +161,17 @@ public class ThirdPersonController : MonoBehaviour
                 playerStats.bulletSpeed,
                 shootDirection
             );
+        } else if (Input.GetMouseButton(0) && Time.time >= lastAttackTime + attackCooldown && !mainGunEquipped) {
+            //crowbar.GetComponent<Collider>().enabled = true;
+            crowbar.GetComponent<BoxCollider>().isTrigger = true;
+            crowbar.AddComponent<Rigidbody>();
+            crowbar.GetComponent<Rigidbody>().useGravity = false;
         }
 
         //Handles reload from totalAmmo
         if (Input.GetKeyDown(KeyCode.E) && playerStats.totalAmmo > 0) {
             if (playerStats.totalAmmo >= 30) {
-
+                //playerStats.totalAmmo
             }
             float temp = playerStats.clipSize - playerStats.ammoInGun;
 
@@ -182,6 +194,7 @@ public class ThirdPersonController : MonoBehaviour
             pressedC = false;
             mainGunEquipped = true;
             currentGunCount = 1;
+            playerStats.attackSpeed = 5f; //Sets main gun attack speed
             Debug.Log("CurrentGunCount: 1");
         }
 
@@ -192,13 +205,17 @@ public class ThirdPersonController : MonoBehaviour
             pressedC = false;
             mainGunEquipped = true;
             currentGunCount = 2;
+            playerStats.attackSpeed = 3f; //Sets pistol attack speed
             Debug.Log("CurrentGunCount: 2");
         }
         
-        //Dequips guns
+        //Equips melee weapon
         if (pressedC && currentGunCount == 2) {
             secondGun.SetActive(false);
-            //Debug.Log("inSetActive");
+            //crowbar.GetComponent<Rigidbody>().maxAngularVelocity = 0;
+            //crowbar.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
+            //crowbar.GetComponent<Rigidbody>().Sleep();
+            crowbar.SetActive(true);
             pressedC = false;
             mainGunEquipped = false;
             currentGunCount = 0;
@@ -208,6 +225,7 @@ public class ThirdPersonController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         //Handles collisions with types of ammo crates
+        /*
         if (other.gameObject.tag == "AmmoCrateSmall") {
             playerStats.totalAmmo += 10;
             if (playerStats.totalAmmo > playerStats.maxClipSize) {
@@ -215,13 +233,15 @@ public class ThirdPersonController : MonoBehaviour
             }
             Destroy(other.gameObject);
         }
+        */
         if (other.gameObject.tag == "AmmoCrateMed") {
-            playerStats.totalAmmo += 20;
+            playerStats.totalAmmo += Random.Range(10, 30);
             if (playerStats.totalAmmo > playerStats.maxClipSize) {
                 playerStats.totalAmmo = playerStats.maxClipSize;
             }
             Destroy(other.gameObject);
         }
+        /*
         if (other.gameObject.tag == "AmmoCrateBig") {
             playerStats.totalAmmo += 30;
             if (playerStats.totalAmmo > playerStats.maxClipSize) {
@@ -229,6 +249,7 @@ public class ThirdPersonController : MonoBehaviour
             }
             Destroy(other.gameObject);
         }
+        */
     }
 
 }
