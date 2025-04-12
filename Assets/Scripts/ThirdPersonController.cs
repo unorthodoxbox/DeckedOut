@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class ThirdPersonController : MonoBehaviour
 {
@@ -163,9 +164,9 @@ public class ThirdPersonController : MonoBehaviour
             );
         } else if (Input.GetMouseButton(0) && Time.time >= lastAttackTime + attackCooldown && !mainGunEquipped) {
             //crowbar.GetComponent<Collider>().enabled = true;
-            crowbar.GetComponent<BoxCollider>().isTrigger = true;
-            crowbar.AddComponent<Rigidbody>();
-            crowbar.GetComponent<Rigidbody>().useGravity = false;
+            StartCoroutine(waiter());
+            //crowbar.AddComponent<Rigidbody>();
+            //crowbar.GetComponent<Rigidbody>().useGravity = false;
         }
 
         //Handles reload from totalAmmo
@@ -185,6 +186,16 @@ public class ThirdPersonController : MonoBehaviour
             }
         }
     }
+
+
+    IEnumerator waiter()
+    {
+        crowbar.GetComponent<BoxCollider>().enabled = true;
+        yield return new WaitForSeconds(1);
+        crowbar.GetComponent<BoxCollider>().enabled = false;
+    }
+    
+
     void WeaponEquip() {
         bool pressedC = Input.GetKeyDown(KeyCode.C);
 
