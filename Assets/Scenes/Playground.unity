@@ -3482,7 +3482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRanged: 1
   bulletPrefab: {fileID: 2056827055676129271, guid: 2162dc9c2483f44b281a029dd06e6cf6, type: 3}
-  bulletSpeed: 50
+  bulletSpeed: 80
   firePoint: {fileID: 407377951}
   cooldown: 0.3
   verticalRecoilCurve:
@@ -10298,7 +10298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRanged: 1
   bulletPrefab: {fileID: 2056827055676129271, guid: 2162dc9c2483f44b281a029dd06e6cf6, type: 3}
-  bulletSpeed: 30
+  bulletSpeed: 40
   firePoint: {fileID: 774218929}
   cooldown: 0.15
   verticalRecoilCurve:
@@ -10496,6 +10496,10 @@ MonoBehaviour:
   cameraTransform: {fileID: 330585546}
   gravity: -9.81
   rotationSpeed: 10
+  playerCamera: {fileID: 330585545}
+  normalFOV: 70
+  zoomedFOV: 50
+  zoomSpeed: 10
   weapons:
   - {fileID: 3763163963617548773}
   - {fileID: 636143907}

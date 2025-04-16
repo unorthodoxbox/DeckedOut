@@ -21,6 +21,16 @@ public class ThirdPersonController : MonoBehaviour
     private InputAction jumpAction;
     private InputAction lookAction;
 
+    [Header("Zoom / Aim Settings")]
+    public Camera playerCamera;
+    public float normalFOV = 60f;
+    public float zoomedFOV = 40f;
+    public float zoomSpeed = 10f;
+
+    private bool isAiming = false;
+    private InputAction aimAction;
+
+
     private float yaw;
     private float pitch;
 
@@ -36,6 +46,7 @@ public class ThirdPersonController : MonoBehaviour
         playerStats = GetComponent<EntityStats>();
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
+        aimAction = playerInput.actions["Aim"];
 
         moveAction = playerInput.actions["Move"];
         sprintAction = playerInput.actions["Sprint"];
@@ -54,7 +65,17 @@ public class ThirdPersonController : MonoBehaviour
         HandleMovement();
         HandleCameraRotation();
         HandleWeaponSwitch();
+        HandleZoom();
     }
+
+    void HandleZoom()
+    {
+        isAiming = aimAction.IsPressed();
+
+        float targetFOV = isAiming ? zoomedFOV : normalFOV;
+        playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFOV, zoomSpeed * Time.deltaTime);
+    }
+
 
     void HandleMovement()
     {
