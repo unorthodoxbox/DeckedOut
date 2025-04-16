@@ -7,6 +7,7 @@ public class AmmoUI : MonoBehaviour
     public GameObject player;
     private EntityStats playerStats;
 
+
     public GameObject ammoUI;
 
     private float ammoInGun;
@@ -25,13 +26,16 @@ public class AmmoUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ammoInGun != playerStats.ammoInGun) {
-            ammoInGun = playerStats.ammoInGun;
+        if (player.GetComponent<ThirdPersonController>().currentWeaponIndex == 1) {
+            ammoUI.GetComponent<TextMeshProUGUI>().text = "∞/∞";
+        } else {
             ammoUI.GetComponent<TextMeshProUGUI>().text = ammoInGun + "\\" + totalAmmo;
-        }
-        if (totalAmmo != playerStats.totalAmmo) {
-            totalAmmo = playerStats.totalAmmo;
-            ammoUI.GetComponent<TextMeshProUGUI>().text = ammoInGun + "\\" + totalAmmo;
+            if (ammoInGun != playerStats.ammoInGun) {
+                ammoInGun = playerStats.ammoInGun;
+            }           
+            if (totalAmmo != playerStats.totalAmmo) {
+                totalAmmo = playerStats.totalAmmo;
+            }
         }
     }
 }

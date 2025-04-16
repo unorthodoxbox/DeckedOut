@@ -50,7 +50,7 @@ public class ThirdPersonController : MonoBehaviour
 
     [Header("Weapons")]
     public GameObject[] weapons;
-    private int currentWeaponIndex = 0;
+    public int currentWeaponIndex = 0;
     public GameObject weaponContainer;
 
     [HideInInspector] public float recoilX;
@@ -233,6 +233,17 @@ public class ThirdPersonController : MonoBehaviour
     {
         for (int i = 0; i < weapons.Length; i++)
             weapons[i].SetActive(i == index);
+    }
+    private void OnTriggerEnter(Collider other) {
+        //Handles collisions with types of ammo crates
+        
+        if (other.gameObject.tag == "AmmoCrateMed") {
+            playerStats.totalAmmo += 20;
+            if (playerStats.totalAmmo > playerStats.maxClipSize) {
+                playerStats.totalAmmo = playerStats.maxClipSize;
+            }
+            Destroy(other.gameObject);
+        }
     }
 
 }

@@ -144,7 +144,9 @@ public class Weapon : MonoBehaviour
             if (playerStats.ammoInGun > 0)
             {
                 Shoot();
-                playerStats.ammoInGun--;
+                if (controller.currentWeaponIndex != 1) {
+                    playerStats.ammoInGun--;
+                }
                 lastShotTime = Time.time;
             }
         }
