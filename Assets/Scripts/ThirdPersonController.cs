@@ -136,6 +136,7 @@ public class ThirdPersonController : MonoBehaviour
         isDead = true;
         controller.enabled = false; // Disable movement
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true; // Show cursor
         weaponContainer.SetActive(false); // Hide weapon container
 
         // Calculate a random dramatic tilt direction
