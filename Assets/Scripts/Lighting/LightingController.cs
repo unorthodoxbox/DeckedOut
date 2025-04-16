@@ -7,7 +7,7 @@ public class LightingController : MonoBehaviour
 {
     [SerializeField] private Light DirectionalLight;
     [SerializeField] private LightingProperties Preset;
-    [SerializeField, Range(0, 24)] private float TimeOfDay;
+    [SerializeField, Range(0, 120)] private float TimeOfDay;
     [SerializeField] private Gradient SunColorGradient;
 
     [SerializeField] private Material skyboxMaterial;
@@ -36,12 +36,12 @@ public class LightingController : MonoBehaviour
         if (Application.isPlaying)
         {
             TimeOfDay += Time.deltaTime;
-            TimeOfDay %= 24; //clamp between 0-24
-            UpdateLighting(TimeOfDay / 24f);
+            TimeOfDay %= 120; //clamp between 0-24
+            UpdateLighting(TimeOfDay / 120f);
         }
         else
         {
-            UpdateLighting(TimeOfDay / 24f);
+            UpdateLighting(TimeOfDay / 120f);
         }
     }
 
