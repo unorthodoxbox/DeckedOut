@@ -28,6 +28,9 @@ public class ThirdPersonController : MonoBehaviour
     public GameObject[] weapons;
     private int currentWeaponIndex = 0;
 
+    [HideInInspector] public float recoilX;
+    [HideInInspector] public float recoilY;
+
     void Awake()
     {
         playerStats = GetComponent<EntityStats>();
@@ -79,9 +82,13 @@ public class ThirdPersonController : MonoBehaviour
         pitch -= lookInput.y * rotationSpeed * Time.deltaTime;
         pitch = Mathf.Clamp(pitch, -89f, 89f);
 
-        transform.rotation = Quaternion.Euler(0f, yaw, 0f);
-        cameraTransform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
+        float finalPitch = pitch + recoilX;
+        float finalYaw = yaw + recoilY;
+
+        transform.rotation = Quaternion.Euler(0f, finalYaw, 0f);
+        cameraTransform.localRotation = Quaternion.Euler(finalPitch, 0f, 0f);
     }
+
 
     void HandleWeaponSwitch()
     {
