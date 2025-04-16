@@ -21,7 +21,7 @@ public class CardObject : MonoBehaviour
         startPos = transform.position;
         playerCamera = Camera.main.transform;
 
-        if (uiCanvas != null)
+        if (uiCanvas != null && cardData != null)
         {
             uiCanvas.SetActive(false);
             nameText.text = cardData.cardName;
