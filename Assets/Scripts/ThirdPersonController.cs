@@ -1,9 +1,21 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+
+
 
 public class ThirdPersonController : MonoBehaviour
 {
+    [Header("Post-Processing")]
+    public Volume postProcessingVolume;
+    public GameObject UI;
+
+    private ColorAdjustments colorAdjustments;
+    private DepthOfField depthOfField;
+
+
     private EntityStats playerStats;
     public Transform cameraTransform;
     public float gravity = -9.81f;
@@ -37,9 +49,16 @@ public class ThirdPersonController : MonoBehaviour
     [Header("Weapons")]
     public GameObject[] weapons;
     private int currentWeaponIndex = 0;
+    public GameObject weaponContainer;
 
     [HideInInspector] public float recoilX;
     [HideInInspector] public float recoilY;
+
+    private bool isDead = false;
+    private Quaternion deathRotation;
+    private float deathFallSpeed = 2f;
+    private float deathTiltAmount = 70f;
+
 
     void Awake()
     {
@@ -59,9 +78,83 @@ public class ThirdPersonController : MonoBehaviour
         playerStats.RefreshStats();
         EquipWeapon(currentWeaponIndex);
     }
+    void Start()
+    {
+        if (postProcessingVolume != null && postProcessingVolume.profile.TryGet(out colorAdjustments))
+        {
+            colorAdjustments.saturation.value = 0f; // Normal color
+        }
+        if (postProcessingVolume.profile.TryGet(out depthOfField))
+        {
+            depthOfField.active = false;
+        }
+
+    }
+    IEnumerator FadeToGrayscale(float duration = 1f)
+    {
+        if (colorAdjustments == null) yield break;
+
+        float startSat = colorAdjustments.saturation.value;
+        float targetSat = -100f;
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime / duration;
+            colorAdjustments.saturation.value = Mathf.Lerp(startSat, targetSat, t);
+            yield return null;
+        }
+
+        colorAdjustments.saturation.value = targetSat;
+    }
+    IEnumerator FadeToBlur(float duration = 1f)
+    {
+        if (depthOfField == null) yield break;
+
+        depthOfField.active = true;
+
+        float startFocus = 10f;
+        float endFocus = 0.1f;
+        float t = 0f;
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime / duration;
+            depthOfField.focusDistance.value = Mathf.Lerp(startFocus, endFocus, t);
+            yield return null;
+        }
+
+        depthOfField.focusDistance.value = endFocus;
+    }
+
+
+    public void TriggerDeath()
+    {
+        UI.SetActive(false); // Hide UI
+        StartCoroutine(FadeToGrayscale(0.5f)); // You can tweak the duration
+        StartCoroutine(FadeToBlur(0.5f));
+        isDead = true;
+        controller.enabled = false; // Disable movement
+        Cursor.lockState = CursorLockMode.None;
+        weaponContainer.SetActive(false); // Hide weapon container
+
+        // Calculate a random dramatic tilt direction
+        Vector3 tiltAxis = Random.value > 0.5f ? Vector3.right : Vector3.left;
+        deathRotation = Quaternion.Euler(deathTiltAmount, 0f, 0f) * cameraTransform.localRotation;
+    }
+
 
     void Update()
     {
+        if (isDead)
+        {
+            cameraTransform.localRotation = Quaternion.Slerp(
+                cameraTransform.localRotation,
+                deathRotation,
+                deathFallSpeed * Time.deltaTime
+            );
+            return;
+        }
         HandleMovement();
         HandleCameraRotation();
         HandleWeaponSwitch();

@@ -45,6 +45,7 @@ public class EntityStats : MonoBehaviour
     public Material lowHPMaterial;
 
     private Coroutine flashRoutine;
+    private bool isDead = false;
 
     public void Awake()
     {
@@ -72,13 +73,19 @@ public class EntityStats : MonoBehaviour
         currHealth -= damage;
         Debug.Log(gameObject.name + " health is now " + currHealth);
         UpdateHealthBar();
-        if (isPlayer)
+        if (isPlayer && !isDead)
         {
             if (flashRoutine != null)
             {
                 StopCoroutine(flashRoutine);
             }
             flashRoutine = StartCoroutine(DamageFlash());
+            if (currHealth <= 0)
+            {
+                isDead = true;
+                GetComponent<ThirdPersonController>().TriggerDeath();
+                // Optionally play a death SFX, screen fade, etc.
+            }
         }
     }
 
