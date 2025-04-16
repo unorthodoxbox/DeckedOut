@@ -10,6 +10,7 @@ public class Weapon : MonoBehaviour
     public float bulletSpeed;
     public Transform firePoint;
     public float cooldown = 0.2f;
+    public float damage = 10f;
     private float lastShotTime = 0f;
 
     [Header("Recoil Settings")]
@@ -122,7 +123,7 @@ public class Weapon : MonoBehaviour
         if (rb != null)
             rb.linearVelocity = direction * bulletSpeed;
 
-        bullet.GetComponent<Bullet>().InitializeVariables(playerStats.attackDamage);
+        bullet.GetComponent<Bullet>().InitializeVariables(damage);
 
         // Add recoil from animation curves
         targetRecoil.x += verticalRecoilCurve.Evaluate(shotsFired);

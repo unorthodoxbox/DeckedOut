@@ -3484,7 +3484,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2056827055676129271, guid: 2162dc9c2483f44b281a029dd06e6cf6, type: 3}
   bulletSpeed: 80
   firePoint: {fileID: 407377951}
-  cooldown: 0.3
+  cooldown: 0.5
+  damage: 20
   verticalRecoilCurve:
     serializedVersion: 2
     m_Curve:
@@ -10416,6 +10417,7 @@ MonoBehaviour:
   bulletSpeed: 40
   firePoint: {fileID: 774218929}
   cooldown: 0.15
+  damage: 10
   verticalRecoilCurve:
     serializedVersion: 2
     m_Curve:
