@@ -11,6 +11,7 @@ public class ThirdPersonController : MonoBehaviour
     [Header("Post-Processing")]
     public Volume postProcessingVolume;
     public GameObject UI;
+    public GameObject deathUI;
 
     private ColorAdjustments colorAdjustments;
     private DepthOfField depthOfField;
@@ -22,7 +23,7 @@ public class ThirdPersonController : MonoBehaviour
     public float rotationSpeed = 5f;
 
     private CharacterController controller;
-    private PlayerInput playerInput;
+    public PlayerInput playerInput;
     private Vector3 velocity;
     private bool isGrounded;
     private bool isCrouching = false;
@@ -130,6 +131,7 @@ public class ThirdPersonController : MonoBehaviour
 
     public void TriggerDeath()
     {
+        deathUI.SetActive(true); // Show death UI
         UI.SetActive(false); // Hide UI
         StartCoroutine(FadeToGrayscale(0.5f)); // You can tweak the duration
         StartCoroutine(FadeToBlur(0.5f));

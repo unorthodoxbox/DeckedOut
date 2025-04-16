@@ -2,6 +2,26 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    private Vector3 recoilOffset;
+
+    [Header("Idle Breathing Sway")]
+    public float idleSwaySpeed = 1f;
+    public float idleSwayAmount = 0.01f;
+
+    [Header("ADS Settings")]
+    public bool isAiming = false; // Will be set externally (optional)
+    public float adsSwayMultiplier = 0.3f;
+
+    private Vector3 idleSwayOffset;
+    private float idleTime;
+
+    [Header("Sway Settings")]
+    public float swayAmount = 0.02f;
+    public float swayMaxAmount = 0.05f;
+    public float swaySmooth = 6f;
+    private Vector3 swayOffset;
+    private Vector3 currentSwayPos;
+
     [Header("Weapon Type")]
     public bool isRanged = true;
 
@@ -35,7 +55,6 @@ public class Weapon : MonoBehaviour
 
     private Vector3 initialLocalPos;
     private Quaternion initialLocalRot;
-    private Vector3 targetLocalPos;
     private Quaternion targetLocalRot;
 
 
@@ -49,7 +68,6 @@ public class Weapon : MonoBehaviour
         {
             initialLocalPos = weaponVisual.localPosition;
             initialLocalRot = weaponVisual.localRotation;
-            targetLocalPos = initialLocalPos;
             targetLocalRot = initialLocalRot;
         }
     }
@@ -57,22 +75,62 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
+        // In Weapon.cs Update() or FixedUpdate()
+        isAiming = controller.playerInput.actions["Aim"].IsPressed();
         HandleFiring();
         ApplyRecoil();
+        CalculateWeaponSway();
         if (weaponVisual != null)
         {
-            weaponVisual.localPosition = Vector3.Lerp(weaponVisual.localPosition, targetLocalPos, visualRecoilRecovery * Time.deltaTime);
-            weaponVisual.localRotation = Quaternion.Slerp(weaponVisual.localRotation, targetLocalRot, visualRecoilRecovery * Time.deltaTime);
+            // --- Combine All Position Effects ---
+            Vector3 targetPosition =
+                initialLocalPos +      // Rest pose
+                recoilOffset +         // Kickback
+                currentSwayPos +       // Look-based sway
+                idleSwayOffset;        // Breathing sway
 
-            // Once close enough, reset the target to idle
-            if (Vector3.Distance(weaponVisual.localPosition, targetLocalPos) < 0.01f)
-            {
-                targetLocalPos = initialLocalPos;
+            weaponVisual.localPosition = Vector3.Lerp(
+                weaponVisual.localPosition,
+                targetPosition,
+                visualRecoilRecovery * Time.deltaTime
+            );
+
+            // --- Rotation Recoil Recovery ---
+            weaponVisual.localRotation = Quaternion.Slerp(
+                weaponVisual.localRotation,
+                targetLocalRot,
+                visualRecoilRecovery * Time.deltaTime
+            );
+
+            // If we're close to resting, reset rotation target
+            if (Quaternion.Angle(weaponVisual.localRotation, targetLocalRot) < 0.1f)
                 targetLocalRot = initialLocalRot;
-            }
         }
 
+
     }
+
+    private void CalculateWeaponSway()
+    {
+        if (controller == null || controller.playerInput == null) return;
+
+        // --- LOOK SWAY ---
+        Vector2 lookInput = controller.playerInput.actions["Look"].ReadValue<Vector2>();
+
+        float swayMult = isAiming ? adsSwayMultiplier : 1f;
+
+        swayOffset.x = Mathf.Clamp(-lookInput.x * swayAmount * swayMult, -swayMaxAmount, swayMaxAmount);
+        swayOffset.y = Mathf.Clamp(-lookInput.y * swayAmount * swayMult, -swayMaxAmount, swayMaxAmount);
+        currentSwayPos = Vector3.Lerp(currentSwayPos, swayOffset, Time.deltaTime * swaySmooth);
+
+        // --- IDLE SWAY (breathing) ---
+        idleTime += Time.deltaTime;
+        float idleX = Mathf.Sin(idleTime * idleSwaySpeed) * idleSwayAmount;
+        float idleY = Mathf.Cos(idleTime * idleSwaySpeed * 0.7f) * idleSwayAmount;
+        idleSwayOffset = new Vector3(idleX, idleY, 0f);
+    }
+
+
 
     void HandleFiring()
     {
@@ -133,13 +191,12 @@ public class Weapon : MonoBehaviour
 
         if (weaponVisual != null)
         {
-            // Recoil kickback (local Z push)
-            targetLocalPos = initialLocalPos + recoilKickback;
+            recoilOffset = recoilKickback;
 
-            // Recoil rotation (local kick)
             Quaternion rotOffset = Quaternion.Euler(recoilRotation);
             targetLocalRot = initialLocalRot * rotOffset;
         }
+
 
     }
 
@@ -153,6 +210,9 @@ public class Weapon : MonoBehaviour
             controller.recoilX = currentRecoil.x;
             controller.recoilY = currentRecoil.y;
         }
+        // Smoothly decay recoil kickback
+        recoilOffset = Vector3.Lerp(recoilOffset, Vector3.zero, visualRecoilRecovery * Time.deltaTime);
+
     }
 
     System.Collections.IEnumerator Swing()
