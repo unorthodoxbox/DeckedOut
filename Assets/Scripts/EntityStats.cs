@@ -59,10 +59,6 @@ public class EntityStats : MonoBehaviour
     {
         currHealth -= damage;
         Debug.Log(gameObject.name + " health is now " + currHealth);
-        if (currHealth <= 0)
-        {
-            die();
-        }
         UpdateHealthBar();
 
     }
@@ -74,12 +70,6 @@ public class EntityStats : MonoBehaviour
         {
             healthBar.SetHealth((int)currHealth);
         }
-    }
-
-    private void die()
-    {
-        Debug.Log(gameObject.name + " has died");
-        Destroy(this.gameObject);
     }
 
 }
