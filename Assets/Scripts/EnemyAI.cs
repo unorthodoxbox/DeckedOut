@@ -82,6 +82,9 @@ public class EnemyAI : MonoBehaviour
             dead = true;
             animator.SetTrigger("Die");
             agent.isStopped = true;
+            GetComponent<Collider>().enabled = false;
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            enemyStats.healthBar.DisableHealthBar();
             Destroy(gameObject, 5f); // Destroy after 5 seconds
         }
     }
