@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using MagicPigGames;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,6 +40,7 @@ public class EntityStats : MonoBehaviour
     [Header("UI Settings")]
     [SerializeField]
     public HealthBar healthBar;
+    public ProgressBar playerHealthBar;
 
     [Header("Player Settings")]
     public bool isPlayer = false;
@@ -69,12 +71,11 @@ public class EntityStats : MonoBehaviour
 
     public void takeDamage(float damage)
     {
-
         currHealth -= damage;
         Debug.Log(gameObject.name + " health is now " + currHealth);
-        UpdateHealthBar();
         if (isPlayer && !isDead)
         {
+            playerHealthBar.SetProgress(currHealth / maxHealth);
             if (flashRoutine != null)
             {
                 StopCoroutine(flashRoutine);
@@ -86,6 +87,10 @@ public class EntityStats : MonoBehaviour
                 GetComponent<ThirdPersonController>().TriggerDeath();
                 // Optionally play a death SFX, screen fade, etc.
             }
+        }
+        else
+        {
+            UpdateHealthBar();
         }
     }
 
