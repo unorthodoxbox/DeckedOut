@@ -1,3 +1,4 @@
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,6 +40,12 @@ public class EntityStats : MonoBehaviour
     [SerializeField]
     public HealthBar healthBar;
 
+    [Header("Player Settings")]
+    public bool isPlayer = false;
+    public Material lowHPMaterial;
+
+    private Coroutine flashRoutine;
+
     public void Awake()
     {
         RefreshStats();
@@ -46,6 +53,10 @@ public class EntityStats : MonoBehaviour
         if (healthBar != null)
         {
             healthBar.SetMaxHealth((int)maxHealth);
+        }
+        if (isPlayer)
+        {
+            lowHPMaterial.SetFloat("_Alpha", 0);
         }
     }
     public void RefreshStats()
@@ -57,11 +68,51 @@ public class EntityStats : MonoBehaviour
 
     public void takeDamage(float damage)
     {
+
         currHealth -= damage;
         Debug.Log(gameObject.name + " health is now " + currHealth);
         UpdateHealthBar();
-
+        if (isPlayer)
+        {
+            if (flashRoutine != null)
+            {
+                StopCoroutine(flashRoutine);
+            }
+            flashRoutine = StartCoroutine(DamageFlash());
+        }
     }
+
+    private IEnumerator DamageFlash()
+    {
+        float flashInDuration = 0.1f;
+        float flashOutDuration = 0.2f;
+        float elapsed = 0f;
+
+        // Fade in
+        while (elapsed < flashInDuration)
+        {
+            float alpha = Mathf.Lerp(0f, 1f, elapsed / flashInDuration);
+            lowHPMaterial.SetFloat("_Alpha", alpha);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        lowHPMaterial.SetFloat("_Alpha", 1f);
+
+        // Fade out
+        elapsed = 0f;
+        while (elapsed < flashOutDuration)
+        {
+            float alpha = Mathf.Lerp(1f, 0f, elapsed / flashOutDuration);
+            lowHPMaterial.SetFloat("_Alpha", alpha);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        lowHPMaterial.SetFloat("_Alpha", 0f);
+
+        flashRoutine = null;
+    }
+
+
 
     private void UpdateHealthBar()
     {

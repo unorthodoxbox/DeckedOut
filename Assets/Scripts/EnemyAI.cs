@@ -147,8 +147,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (playerStats && Vector3.Distance(transform.position, player.position) <= attackRange)
         {
-            playerStats.currHealth -= damage;
-            playerStats.currHealth = Mathf.Max(playerStats.currHealth, 0);
+            playerStats.takeDamage(damage);
         }
     }
 
