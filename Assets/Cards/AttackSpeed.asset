@@ -16,6 +16,6 @@ MonoBehaviour:
   description: Increase attack speed
   icon: {fileID: 0}
   statType: 3
-  value: 1
+  value: 2
   isMultiplicative: 0
   stacksMultiplicatively: 0

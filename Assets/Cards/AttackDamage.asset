@@ -16,6 +16,6 @@ MonoBehaviour:
   description: Increase attack Damage
   icon: {fileID: 0}
   statType: 4
-  value: 1
+  value: 5
   isMultiplicative: 0
   stacksMultiplicatively: 0

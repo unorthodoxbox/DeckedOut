@@ -16,6 +16,6 @@ MonoBehaviour:
   description: Increase max health
   icon: {fileID: 0}
   statType: 7
-  value: 1
+  value: 20
   isMultiplicative: 0
   stacksMultiplicatively: 0

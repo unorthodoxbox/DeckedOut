@@ -16,6 +16,6 @@ MonoBehaviour:
   description: Increase the amount of ammo you can hold
   icon: {fileID: 0}
   statType: 6
-  value: 1
+  value: 30
   isMultiplicative: 0
   stacksMultiplicatively: 0

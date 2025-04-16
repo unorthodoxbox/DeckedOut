@@ -16,6 +16,6 @@ MonoBehaviour:
   description: Increase max ammo per clip
   icon: {fileID: 0}
   statType: 5
-  value: 1
+  value: 15
   isMultiplicative: 0
   stacksMultiplicatively: 0
