@@ -1,6 +1,8 @@
 ﻿using MagicPigGames;
 using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
+
 using UnityEngine.UI;
 
 public class EntityStats : MonoBehaviour
@@ -51,8 +53,8 @@ public class EntityStats : MonoBehaviour
     private bool isDead = false;
 
     // Card Variables
-    [HideInInspector]
-    public ArrayList statCards = new ArrayList();
+    //[HideInInspector]
+    public List<StatCard> statCards = new List<StatCard>();
 
     public void Awake()
     {
@@ -72,6 +74,7 @@ public class EntityStats : MonoBehaviour
         walkSpeed = walkSpeedMult * moveSpeed;
         sprintSpeed = sprintSpeedMult * moveSpeed;
         crouchSpeed = crouchSpeedMult * moveSpeed;
+
     }
 
     public void takeDamage(float damage)

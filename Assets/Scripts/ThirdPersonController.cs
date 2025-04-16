@@ -28,6 +28,7 @@ public class ThirdPersonController : MonoBehaviour
     private bool isGrounded;
     private bool isCrouching = false;
     private float currentSpeed;
+    private float currJumps;
 
     private InputAction moveAction;
     private InputAction sprintAction;
@@ -158,6 +159,7 @@ public class ThirdPersonController : MonoBehaviour
             );
             return;
         }
+        
         HandleMovement();
         HandleCameraRotation();
         HandleWeaponSwitch();
@@ -183,11 +185,16 @@ public class ThirdPersonController : MonoBehaviour
         currentSpeed = sprintAction.IsPressed() && !isCrouching
             ? playerStats.sprintSpeed
             : isCrouching ? playerStats.crouchSpeed : playerStats.walkSpeed;
-
-        if (isGrounded && velocity.y < 0) velocity.y = -2f;
-        if (jumpAction.triggered && isGrounded)
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f;
+        }
+        if (isGrounded) currJumps = playerStats.numJumps; // Reset num of jumps if grounded
+        if (jumpAction.triggered && currJumps > 0)
+        {
             velocity.y = Mathf.Sqrt(playerStats.jumpHeight * -2f * gravity);
-
+            currJumps--;
+        }
         velocity.y += gravity * Time.deltaTime;
         controller.Move(move * currentSpeed * Time.deltaTime + velocity * Time.deltaTime);
     }
