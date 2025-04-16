@@ -57,6 +57,7 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+        if (dead) return;
         if (!player) return;
 
         float distance = Vector3.Distance(transform.position, player.position);
