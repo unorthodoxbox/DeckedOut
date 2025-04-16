@@ -20,6 +20,9 @@ public class EnemyAI : MonoBehaviour
     public float wanderRadius = 10f;
     public float wanderInterval = 5f;
 
+    [Header("Other")]
+    public Animator animator;
+
     private int currentPatrolIndex = 0;
     private float lastAttackTime;
     private float lastWanderTime;
@@ -27,10 +30,14 @@ public class EnemyAI : MonoBehaviour
     private NavMeshAgent agent;
     private EntityStats playerStats;
 
+    public EntityStats enemyStats;
+    bool dead = false;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         playerStats = player?.GetComponent<EntityStats>();
+        animator.SetFloat("Speed", 0);
         agent = GetComponent<NavMeshAgent>();
         lastAttackTime = -attackCooldown;
         lastWanderTime = Time.time;
@@ -54,6 +61,7 @@ public class EnemyAI : MonoBehaviour
         if (distance <= detectionRange)
         {
             agent.SetDestination(player.position);
+            animator.SetFloat("Speed", 0.5f);
 
             if (distance <= attackRange)
             {
@@ -67,6 +75,14 @@ public class EnemyAI : MonoBehaviour
                 Patrol();
             else if (mode == BehaviorMode.Wander || mode == BehaviorMode.Both)
                 WanderCheck();
+        }
+
+        if (enemyStats.currHealth <= 0 && !dead)
+        {
+            dead = true;
+            animator.SetTrigger("Die");
+            agent.isStopped = true;
+            Destroy(gameObject, 5f); // Destroy after 5 seconds
         }
     }
 
@@ -90,6 +106,7 @@ public class EnemyAI : MonoBehaviour
 
     void Wander()
     {
+        animator.SetFloat("Speed", 0.1f);
         Vector3 randomDirection = Random.insideUnitSphere * wanderRadius;
         randomDirection += transform.position;
 
@@ -97,6 +114,11 @@ public class EnemyAI : MonoBehaviour
         if (NavMesh.SamplePosition(randomDirection, out hit, wanderRadius, NavMesh.AllAreas))
         {
             agent.SetDestination(hit.position);
+            if (!agent.pathPending && agent.remainingDistance < 0.5f)
+            {
+                animator.SetFloat("Speed", 0);
+                lastWanderTime = Time.time + wanderInterval; // Reset wander time
+            }
         }
     }
 
@@ -105,6 +127,8 @@ public class EnemyAI : MonoBehaviour
         if (Time.time >= lastAttackTime + attackCooldown)
         {
             Debug.Log("Bug attacks player!");
+            animator.SetFloat("Speed", 0);
+            animator.SetTrigger("Attack");
 
             if (playerStats)
             {
