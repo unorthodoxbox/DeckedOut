@@ -155,7 +155,7 @@ public class Weapon : MonoBehaviour
         }
 
         // Reload
-        if (Input.GetKeyDown(KeyCode.E) && playerStats.totalAmmo > 0)
+        if (Input.GetKeyDown(KeyCode.R) && playerStats.totalAmmo > 0)
         {
             float needed = playerStats.clipSize - playerStats.ammoInGun;
             float reloadAmount = Mathf.Min(needed, playerStats.totalAmmo);
