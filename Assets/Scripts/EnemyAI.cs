@@ -33,6 +33,9 @@ public class EnemyAI : MonoBehaviour
     public EntityStats enemyStats;
     bool dead = false;
 
+    private bool isAttacking = false;
+
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
@@ -127,21 +130,34 @@ public class EnemyAI : MonoBehaviour
 
     void TryAttack()
     {
-        if (Time.time >= lastAttackTime + attackCooldown)
+        if (Time.time >= lastAttackTime + attackCooldown && !isAttacking)
         {
-            Debug.Log("Bug attacks player!");
-            animator.SetFloat("Speed", 0);
-            animator.SetTrigger("Attack");
-
-            if (playerStats)
-            {
-                playerStats.currHealth -= damage;
-                playerStats.currHealth = Mathf.Max(playerStats.currHealth, 0);
-            }
-
+            isAttacking = true;
             lastAttackTime = Time.time;
+
+            agent.isStopped = true;
+            animator.SetFloat("Speed", 0);
+            animator.ResetTrigger("Attack");
+            animator.SetTrigger("Attack");
         }
     }
+
+    public void AttackHit()
+    {
+        if (playerStats && Vector3.Distance(transform.position, player.position) <= attackRange)
+        {
+            playerStats.currHealth -= damage;
+            playerStats.currHealth = Mathf.Max(playerStats.currHealth, 0);
+        }
+    }
+
+    public void EndAttack()
+    {
+        isAttacking = false;
+        agent.isStopped = false;
+    }
+
+
 
     void FaceTarget()
     {
