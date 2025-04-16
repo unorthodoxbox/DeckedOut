@@ -43,6 +43,10 @@ public class EntityStats : MonoBehaviour
     {
         RefreshStats();
         currHealth = maxHealth;
+        if (healthBar != null)
+        {
+            healthBar.SetMaxHealth((int)maxHealth);
+        }
     }
     public void RefreshStats()
     {
