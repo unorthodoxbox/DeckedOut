@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 25
+  detectionRange: 30
   attackRange: 4
   attackCooldown: 2
   damage: 10
@@ -451,7 +451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 25
+  detectionRange: 30
   attackRange: 4
   attackCooldown: 2
   damage: 10
@@ -3385,7 +3385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 25
+  detectionRange: 30
   attackRange: 4
   attackCooldown: 2
   damage: 10
@@ -3938,7 +3938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 25
+  detectionRange: 30
   attackRange: 4
   attackCooldown: 2
   damage: 10
@@ -4235,7 +4235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 25
+  detectionRange: 30
   attackRange: 4
   attackCooldown: 2
   damage: 10
@@ -4971,7 +4971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 25
+  detectionRange: 30
   attackRange: 4
   attackCooldown: 2
   damage: 10
@@ -6054,7 +6054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 25
+  detectionRange: 30
   attackRange: 4
   attackCooldown: 2
   damage: 10
@@ -6249,7 +6249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 25
+  detectionRange: 30
   attackRange: 4
   attackCooldown: 2
   damage: 10
@@ -6444,7 +6444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 25
+  detectionRange: 30
   attackRange: 4
   attackCooldown: 2
   damage: 10
@@ -7812,7 +7812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 25
+  detectionRange: 30
   attackRange: 4
   attackCooldown: 2
   damage: 10
@@ -8442,7 +8442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 25
+  detectionRange: 30
   attackRange: 4
   attackCooldown: 2
   damage: 10
@@ -9609,7 +9609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 25
+  detectionRange: 30
   attackRange: 4
   attackCooldown: 2
   damage: 10
@@ -9804,7 +9804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 25
+  detectionRange: 30
   attackRange: 4
   attackCooldown: 2
   damage: 10
