@@ -256,12 +256,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 26.8
+  detectionRange: 25
   attackRange: 4
-  attackCooldown: 1.5
+  attackCooldown: 2
   damage: 10
   patrolPoints: []
-  wanderRadius: 75.6
+  wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 1208822951}
   enemyStats: {fileID: 16438669}
@@ -451,12 +451,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 26.8
+  detectionRange: 25
   attackRange: 4
-  attackCooldown: 1.5
+  attackCooldown: 2
   damage: 10
   patrolPoints: []
-  wanderRadius: 75.6
+  wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 123102464}
   enemyStats: {fileID: 67219478}
@@ -3385,12 +3385,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 26.8
+  detectionRange: 25
   attackRange: 4
-  attackCooldown: 1.5
+  attackCooldown: 2
   damage: 10
   patrolPoints: []
-  wanderRadius: 75.6
+  wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 1444132710}
   enemyStats: {fileID: 634009229}
@@ -3937,12 +3937,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 26.8
+  detectionRange: 25
   attackRange: 4
-  attackCooldown: 1.5
+  attackCooldown: 2
   damage: 10
   patrolPoints: []
-  wanderRadius: 75.6
+  wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 1696217092}
   enemyStats: {fileID: 881491592}
@@ -4234,12 +4234,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 26.8
+  detectionRange: 25
   attackRange: 4
-  attackCooldown: 1.5
+  attackCooldown: 2
   damage: 10
   patrolPoints: []
-  wanderRadius: 75.6
+  wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 1616655525}
   enemyStats: {fileID: 912061361}
@@ -4970,12 +4970,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 26.8
+  detectionRange: 25
   attackRange: 4
-  attackCooldown: 1.5
+  attackCooldown: 2
   damage: 10
   patrolPoints: []
-  wanderRadius: 75.6
+  wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 154534352}
   enemyStats: {fileID: 1091913770}
@@ -6053,12 +6053,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 26.8
+  detectionRange: 25
   attackRange: 4
-  attackCooldown: 1.5
+  attackCooldown: 2
   damage: 10
   patrolPoints: []
-  wanderRadius: 75.6
+  wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 1029632999}
   enemyStats: {fileID: 1238688940}
@@ -6248,12 +6248,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 26.8
+  detectionRange: 25
   attackRange: 4
-  attackCooldown: 1.5
+  attackCooldown: 2
   damage: 10
   patrolPoints: []
-  wanderRadius: 75.6
+  wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 1397440987}
   enemyStats: {fileID: 1307616098}
@@ -6443,12 +6443,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 26.8
+  detectionRange: 25
   attackRange: 4
-  attackCooldown: 1.5
+  attackCooldown: 2
   damage: 10
   patrolPoints: []
-  wanderRadius: 75.6
+  wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 1191730695}
   enemyStats: {fileID: 1308674019}
@@ -7811,12 +7811,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 26.8
+  detectionRange: 25
   attackRange: 4
-  attackCooldown: 1.5
+  attackCooldown: 2
   damage: 10
   patrolPoints: []
-  wanderRadius: 75.6
+  wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 1629351250}
   enemyStats: {fileID: 2774050547812885458}
@@ -8441,12 +8441,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 26.8
+  detectionRange: 25
   attackRange: 4
-  attackCooldown: 1.5
+  attackCooldown: 2
   damage: 10
   patrolPoints: []
-  wanderRadius: 75.6
+  wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 266187971}
   enemyStats: {fileID: 1692592413}
@@ -9608,12 +9608,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 26.8
+  detectionRange: 25
   attackRange: 4
-  attackCooldown: 1.5
+  attackCooldown: 2
   damage: 10
   patrolPoints: []
-  wanderRadius: 75.6
+  wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 1730103603}
   enemyStats: {fileID: 1942863118}
@@ -9803,12 +9803,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 1
-  detectionRange: 26.8
+  detectionRange: 25
   attackRange: 4
-  attackCooldown: 1.5
+  attackCooldown: 2
   damage: 10
   patrolPoints: []
-  wanderRadius: 75.6
+  wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 296011782}
   enemyStats: {fileID: 1992162049}
