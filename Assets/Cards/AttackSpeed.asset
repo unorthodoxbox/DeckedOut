@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ead8f7aa8e48484a9e296284e6a0f41, type: 3}
-  m_Name: SpeedBoostCard
+  m_Name: AttackSpeed
   m_EditorClassIdentifier: 
-  cardName: Speed
-  description: Increase move speed
+  cardName: Attack Speed
+  description: Increase attack speed
   icon: {fileID: 0}
-  statType: 0
+  statType: 3
   value: 1
   isMultiplicative: 0
   stacksMultiplicatively: 0

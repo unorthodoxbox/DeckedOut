@@ -14,22 +14,38 @@ public class StatCard : Card
 
         switch (statType)
         {
-            case StatType.maxHealth:
-                ApplyStat(ref entity.maxHealth);
-                break;
             case StatType.moveSpeed:
                 ApplyStat(ref entity.moveSpeed);
+                break;
+            case StatType.jumpHeight:
+                ApplyStat(ref entity.jumpHeight);
+                break;
+            case StatType.numJumps:
+                ApplyStat(ref entity.numJumps);
+                break;
+            case StatType.attackSpeed:
+                ApplyStat(ref entity.attackSpeed);
                 break;
             case StatType.attackDamage:
                 ApplyStat(ref entity.attackDamage);
                 break;
-            /*
-            case StatType.Defense:
-                ApplyStat(ref entity.defense);
+            case StatType.clipSize:
+                ApplyStat(ref entity.clipSize);
                 break;
-            */
+            case StatType.maxClipSize:
+                ApplyStat(ref entity.maxClipSize);
+                break;
+            case StatType.maxHealth:
+                ApplyStat(ref entity.maxHealth);
+                break;
+            default:
+                Debug.LogWarning("Unhandled StatType: " + statType);
+                break;
+
+
         }
         entity.RefreshStats();
+        entity.statCards.Add(this);
     }
 
     private void ApplyStat(ref float stat)

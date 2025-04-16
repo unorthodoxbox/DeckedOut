@@ -8,6 +8,7 @@ public class EntityStats : MonoBehaviour
     [Header("Movement Settings")]
     public float moveSpeed = 3f;
     public float jumpHeight = 2f;
+    public float numJumps = 1f;
 
     [Header("MoveSpeed Multipliers")]
     [SerializeField]
@@ -48,6 +49,10 @@ public class EntityStats : MonoBehaviour
 
     private Coroutine flashRoutine;
     private bool isDead = false;
+
+    // Card Variables
+    [HideInInspector]
+    public ArrayList statCards = new ArrayList();
 
     public void Awake()
     {
