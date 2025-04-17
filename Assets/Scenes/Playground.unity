@@ -3033,13 +3033,13 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: e7492f742271f4888a5db949af6c8206, type: 3}
   m_Resource: {fileID: 8300000, guid: e7492f742271f4888a5db949af6c8206, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.762
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 162
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -3444,14 +3444,26 @@ MonoBehaviour:
   - name: Music
     source: {fileID: 330585548}
     clip: {fileID: 8300000, guid: e7492f742271f4888a5db949af6c8206, type: 3}
-    volume: 0.816
+    volume: 0.689
     pitch: 1
     loop: 1
   - name: Hiss
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: cfcd98daf610c4da2a281f357e8b0153, type: 3}
-    volume: 0.716
+    volume: 0.476
     pitch: 0.77
+    loop: 0
+  - name: Buzz
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 517b26527c2e041e9a8352ed4b710b31, type: 3}
+    volume: 0.162
+    pitch: 2.03
+    loop: 1
+  - name: Card Collected
+    source: {fileID: 330585548}
+    clip: {fileID: 8300000, guid: 94f284e212f8a4f91984138cbde86e41, type: 3}
+    volume: 0.773
+    pitch: 1
     loop: 0
 --- !u!4 &555278558
 Transform:
@@ -5172,6 +5184,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2112321640312850355, guid: 194c81bf4ea9d4645949d7d2da443ea0, type: 3}
+      propertyPath: m_Pitch
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4435121925645799528, guid: 194c81bf4ea9d4645949d7d2da443ea0, type: 3}
       propertyPath: m_Name
       value: CardObject
@@ -5220,7 +5236,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6872038453118937367, guid: 194c81bf4ea9d4645949d7d2da443ea0, type: 3}
+      propertyPath: manner
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 0}
+    - {fileID: 2684643328579716262, guid: 194c81bf4ea9d4645949d7d2da443ea0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour
                  sound.source.playOnAwake = false;
             }
             sound.source.volume = sound.volume;
-            if(sound.source.resource == null || sound.source.resource != sound.clip) {
+            if(sound.source.resource == null /*|| sound.source.resource != sound.clip*/) {
                     sound.source.resource = sound.clip;    
             }   
             sound.source.pitch = sound.pitch;
@@ -53,10 +53,7 @@ public class AudioManager : MonoBehaviour
         if (s == null) {
             return;
         }
-        if(s.source.resource != s.clip) {
-            s.source.resource = s.clip;
-         }
-        
+                
         s.source.PlayOneShot(s.clip, s.volume);
     }
 

@@ -62,6 +62,7 @@ public class CardObject : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             cardData.ApplyEffect(other.gameObject.GetComponent<EntityStats>());
+           GameObject.Find("Audio Manager").GetComponent<AudioManager>().PlayOneShot("Card Collected");
             Destroy(this.gameObject);
         }
     }

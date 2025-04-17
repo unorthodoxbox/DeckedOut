@@ -1,9 +1,11 @@
 using System;
+using System.Diagnostics;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using Random = UnityEngine.Random;
 public enum Manner {
+    STOP, // SoundPlayer will only play when Play is called
     FREEZE, // SoundPlayer will play the same sound in Sounds
     ORDER, // SoundPlayer will play the sounds in order
     SHUFFLE, // SoundPlayer will shuffle randomly through sounds
@@ -42,25 +44,13 @@ public class SoundPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(audioSource.isPlaying == true) {
+        if(audioSource.isPlaying == true || manner == Manner.STOP) {
             return;    
         }
         timer -= Time.deltaTime;
         if(timer < 0) {        
             audioManager.PlayFromSource(sounds[currentSound], audioSource);
-            switch(manner) {
-                case Manner.FREEZE:
-                    break;
-                case Manner.ORDER:
-                    currentSound++;
-                    if(currentSound >= sounds.Length){
-                        currentSound = 0;
-                    }
-                    break;
-                case Manner.SHUFFLE:
-                    currentSound = Random.Range(0, sounds.Length);
-                    break;
-            }
+            SelectSound();
             timer = delay + Random.Range(-stagger, stagger);
             if(timer <= 0) {
                 timer = delay;
@@ -70,5 +60,30 @@ public class SoundPlayer : MonoBehaviour
 
     public void ChangeManner(Manner manner) {
         this.manner = manner;
+    }
+
+    private void SelectSound() {
+        switch(manner) {
+            case Manner.FREEZE:
+                break;
+            case Manner.ORDER:
+                currentSound++;
+                if(currentSound >= sounds.Length){
+                    currentSound = 0;
+                }
+                break;
+            case Manner.SHUFFLE:
+                currentSound = Random.Range(0, sounds.Length);
+                break;
+            }
+    }
+    public void Play() {
+        audioManager.PlayFromSource(sounds[currentSound], audioSource);
+        SelectSound();
+    }
+
+    public void Play(string name) {
+        audioSource.Stop();
+        audioManager.PlayFromSource(name, audioSource);
     }
 }
