@@ -23,6 +23,8 @@ public class EnemyAI : MonoBehaviour
     [Header("Other")]
     public Animator animator;
 
+    public Canvas UIObject;
+
     private int currentPatrolIndex = 0;
     private float lastAttackTime;
     private float lastWanderTime;
@@ -84,6 +86,7 @@ public class EnemyAI : MonoBehaviour
         if (enemyStats.currHealth <= 0 && !dead)
         {
             dead = true;
+            UIObject.GetComponent<AmmoUI>().killedEnemies++;
             animator.SetTrigger("Die");
             agent.isStopped = true;
             GetComponent<Collider>().enabled = false;

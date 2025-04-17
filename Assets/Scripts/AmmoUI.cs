@@ -9,9 +9,13 @@ public class AmmoUI : MonoBehaviour
 
 
     public GameObject ammoUI;
+    public Slider waveProgressSlider;
 
     private float ammoInGun;
     private float totalAmmo;
+
+    public int totalEnemies = 6;
+    public int killedEnemies = 0;
 
 
     void Awake()
@@ -21,6 +25,9 @@ public class AmmoUI : MonoBehaviour
         ammoInGun = playerStats.ammoInGun;
         totalAmmo = playerStats.totalAmmo;
         ammoUI.GetComponent<TextMeshProUGUI>().text = ammoInGun + "\\" + totalAmmo;
+
+        waveProgressSlider.maxValue = totalEnemies;
+        //waveProgressSlider.value = 20;
     }
 
     // Update is called once per frame
@@ -37,5 +44,7 @@ public class AmmoUI : MonoBehaviour
                 totalAmmo = playerStats.totalAmmo;
             }
         }
+
+        waveProgressSlider.value = killedEnemies;
     }
 }
