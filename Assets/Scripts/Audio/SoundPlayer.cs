@@ -14,7 +14,7 @@ public enum Manner {
 // A component meant mainly for periodic emission of SFX from a Game Object. 
 public class SoundPlayer : MonoBehaviour
 {
-    AudioSource audioSource;
+    public AudioSource audioSource;
     AudioManager audioManager;
     public Manner manner = Manner.FREEZE;
 
@@ -31,7 +31,7 @@ public class SoundPlayer : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {   
-        timer = delay + Random.Range(-stagger, stagger);
+        timer = Random.Range(0, delay);
         audioManager = GameObject.Find("Audio Manager").GetComponent<AudioManager>();
         if(audioSource == null) {
             audioSource = gameObject.AddComponent<AudioSource>(); 
@@ -42,6 +42,9 @@ public class SoundPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(audioSource.isPlaying == true) {
+            return;    
+        }
         timer -= Time.deltaTime;
         if(timer < 0) {        
             audioManager.PlayFromSource(sounds[currentSound], audioSource);
