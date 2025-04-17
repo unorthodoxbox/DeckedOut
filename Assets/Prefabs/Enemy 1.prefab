@@ -356,6 +356,7 @@ GameObject:
   - component: {fileID: 5664217501827066079}
   - component: {fileID: 2758788094940934885}
   - component: {fileID: 5599921833574029125}
+  - component: {fileID: -5961421524020284660}
   m_Layer: 0
   m_Name: Enemy 1
   m_TagString: Enemy
@@ -521,7 +522,25 @@ MonoBehaviour:
   wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 2139865869203454230}
+  UIObject: {fileID: 0}
   enemyStats: {fileID: 4230097021714231523}
+--- !u!114 &-5961421524020284660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8574783782633231195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d62881b6569594ae0a3cac4e3e82c915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manner: 0
+  delay: 25
+  stagger: 10
+  sounds:
+  - Hiss
 --- !u!1001 &8322099437516083085
 PrefabInstance:
   m_ObjectHideFlags: 0
