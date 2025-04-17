@@ -268,6 +268,7 @@ MonoBehaviour:
   wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 1208822951}
+  UIObject: {fileID: 0}
   enemyStats: {fileID: 16438669}
 --- !u!195 &16438672
 NavMeshAgent:
@@ -618,6 +619,7 @@ MonoBehaviour:
   wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 123102464}
+  UIObject: {fileID: 0}
   enemyStats: {fileID: 67219478}
 --- !u!195 &67219481
 NavMeshAgent:
@@ -2891,6 +2893,7 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3017,6 +3020,103 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!82 &330585548
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -7281522680816175890, guid: e5c851cdcd29c49748d6b2e9ef847604, type: 2}
+  m_audioClip: {fileID: 8300000, guid: e7492f742271f4888a5db949af6c8206, type: 3}
+  m_Resource: {fileID: 8300000, guid: e7492f742271f4888a5db949af6c8206, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &367413307
 Transform:
   m_ObjectHideFlags: 0
@@ -3647,6 +3747,7 @@ MonoBehaviour:
   wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 1444132710}
+  UIObject: {fileID: 0}
   enemyStats: {fileID: 634009229}
 --- !u!195 &634009232
 NavMeshAgent:
@@ -4539,6 +4640,7 @@ MonoBehaviour:
   wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 1696217092}
+  UIObject: {fileID: 0}
   enemyStats: {fileID: 881491592}
 --- !u!195 &881491595
 NavMeshAgent:
@@ -4709,6 +4811,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 7585835097637955920}
   ammoUI: {fileID: 1822082485}
+  waveProgressSlider: {fileID: 0}
+  totalEnemies: 6
+  killedEnemies: 0
 --- !u!1 &906229438
 GameObject:
   m_ObjectHideFlags: 0
@@ -4940,6 +5045,7 @@ MonoBehaviour:
   wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 1616655525}
+  UIObject: {fileID: 0}
   enemyStats: {fileID: 912061361}
 --- !u!195 &912061364
 NavMeshAgent:
@@ -5651,6 +5757,7 @@ MonoBehaviour:
   wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 154534352}
+  UIObject: {fileID: 0}
   enemyStats: {fileID: 1091913770}
 --- !u!195 &1091913773
 NavMeshAgent:
@@ -7006,6 +7113,7 @@ MonoBehaviour:
   wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 1029632999}
+  UIObject: {fileID: 0}
   enemyStats: {fileID: 1238688940}
 --- !u!195 &1238688943
 NavMeshAgent:
@@ -7201,6 +7309,7 @@ MonoBehaviour:
   wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 1397440987}
+  UIObject: {fileID: 0}
   enemyStats: {fileID: 1307616098}
 --- !u!195 &1307616101
 NavMeshAgent:
@@ -7396,6 +7505,7 @@ MonoBehaviour:
   wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 1191730695}
+  UIObject: {fileID: 0}
   enemyStats: {fileID: 1308674019}
 --- !u!195 &1308674022
 NavMeshAgent:
@@ -9410,6 +9520,7 @@ MonoBehaviour:
   wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 266187971}
+  UIObject: {fileID: 0}
   enemyStats: {fileID: 1692592413}
 --- !u!195 &1692592416
 NavMeshAgent:
@@ -10788,6 +10899,7 @@ MonoBehaviour:
   wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 1730103603}
+  UIObject: {fileID: 0}
   enemyStats: {fileID: 1942863118}
 --- !u!195 &1942863121
 NavMeshAgent:
@@ -11058,6 +11170,7 @@ MonoBehaviour:
   wanderRadius: 75
   wanderInterval: 5
   animator: {fileID: 296011782}
+  UIObject: {fileID: 0}
   enemyStats: {fileID: 1992162049}
 --- !u!195 &1992162052
 NavMeshAgent:
