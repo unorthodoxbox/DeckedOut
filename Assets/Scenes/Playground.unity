@@ -3391,21 +3391,21 @@ MonoBehaviour:
     source: {fileID: 741775436}
     clip: {fileID: 8300000, guid: 94f284e212f8a4f91984138cbde86e41, type: 3}
     category: 0
-    volume: 1
+    volume: 0.624
     pitch: 1
     loop: 0
-  - name: Hurt
+  - name: Player Hurt
     source: {fileID: 741775436}
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 5684d5fe993d0422b8a0ac4c0c5cb34b, type: 3}
     category: 0
-    volume: 1
-    pitch: 1
+    volume: 0.591
+    pitch: 0.46
     loop: 0
   - name: AR Shot
     source: {fileID: 776370097}
     clip: {fileID: 8300000, guid: c6c63d531a84947a7b05f3343f7a9076, type: 3}
     category: 0
-    volume: 0.858
+    volume: 0.542
     pitch: 0.75
     loop: 0
   - name: AR Reload
@@ -3439,6 +3439,34 @@ MonoBehaviour:
   - name: Pistol Empty
     source: {fileID: 776370097}
     clip: {fileID: 8300000, guid: 8f470e23c92054cb99e2281ac1da82b1, type: 3}
+    category: 0
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Player Die
+    source: {fileID: 741775436}
+    clip: {fileID: 0}
+    category: 0
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Player Step1
+    source: {fileID: 741775436}
+    clip: {fileID: 8300000, guid: 12fc97705183842c1b42bef156111c7d, type: 3}
+    category: 0
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Player Step2
+    source: {fileID: 741775436}
+    clip: {fileID: 8300000, guid: f4c52e29bb36d4cec954c548de9be9d8, type: 3}
+    category: 0
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Player Jump
+    source: {fileID: 741775436}
+    clip: {fileID: 8300000, guid: 70d5bd728bbdb43b4b66d38765c4c806, type: 3}
     category: 0
     volume: 1
     pitch: 1
@@ -3479,11 +3507,18 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 0
+  - name: Bug Hurt
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 00eb89bc2d198479fb9cbc72cf6db434, type: 3}
+    category: 0
+    volume: 1
+    pitch: 1
+    loop: 0
   - name: Card Hum
     source: {fileID: 0}
-    clip: {fileID: 8300000, guid: 517b26527c2e041e9a8352ed4b710b31, type: 3}
+    clip: {fileID: 8300000, guid: 83481a8bd9fc94077aa71944c46c1ca7, type: 3}
     category: 0
-    volume: 0.563
+    volume: 1
     pitch: 1
     loop: 0
 --- !u!4 &555278558
@@ -4432,7 +4467,9 @@ MonoBehaviour:
   manner: 0
   delay: 0
   stagger: 0
+  pitchJitter: 0
   sounds: []
+  playlist: []
 --- !u!4 &757513498 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 571ac1ec3563ce5458b0cb7093960cf6, type: 3}
@@ -4535,7 +4572,9 @@ MonoBehaviour:
   manner: 0
   delay: 0
   stagger: 0
+  pitchJitter: 0
   sounds: []
+  playlist: []
 --- !u!82 &776370097
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5260,7 +5299,9 @@ MonoBehaviour:
   manner: 1
   delay: 0
   stagger: 0
+  pitchJitter: 0
   sounds: []
+  playlist: []
 --- !u!165 &897962570
 AudioHighPassFilter:
   m_ObjectHideFlags: 0
@@ -5737,6 +5778,7 @@ Transform:
   - {fileID: 741775437}
   - {fileID: 776370099}
   - {fileID: 897962567}
+  - {fileID: 1421648388}
   m_Father: {fileID: 353854464597067268}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1020166137
@@ -8099,6 +8141,10 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 523515706274592060, guid: 713eab21e4325e14ab39450894d8e9ee, type: 3}
+      propertyPath: makeNoiseOnDie
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2428059451169103841, guid: 713eab21e4325e14ab39450894d8e9ee, type: 3}
       propertyPath: m_Name
       value: Enemy (10)
@@ -8867,6 +8913,59 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 8074908081809168040, guid: 571ac1ec3563ce5458b0cb7093960cf6, type: 3}
+--- !u!1 &1421648387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1421648388}
+  - component: {fileID: 1421648389}
+  m_Layer: 0
+  m_Name: Locomotion Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1421648388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421648387}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 990341218}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1421648389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421648387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d62881b6569594ae0a3cac4e3e82c915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 741775436}
+  manner: 2
+  delay: 0
+  stagger: 0
+  pitchJitter: 0
+  sounds: []
+  playlist:
+  - Player Step1
+  - Player Step2
 --- !u!1001 &1444132707
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12285,6 +12384,10 @@ MonoBehaviour:
   currHealth: 100
   healthBar: {fileID: 0}
   playerHealthBar: {fileID: 923147203}
+  makeNoiseOnHurt: 1
+  makeNoiseOnDie: 0
+  soundPlayer: {fileID: 741775438}
+  prefix: Player
   isPlayer: 1
   lowHPMaterial: {fileID: 2100000, guid: dec27e3fe0b68a3408d416786e660f26, type: 2}
   statCards: []
@@ -12707,6 +12810,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 536757938043111224, guid: e803dacf199e56f46b923633453df7a1, type: 3}
+      propertyPath: prefix
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 536757938043111224, guid: e803dacf199e56f46b923633453df7a1, type: 3}
+      propertyPath: makeNoiseOnHurt
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 536757938043111224, guid: e803dacf199e56f46b923633453df7a1, type: 3}
       propertyPath: playerHealthBar
       value: 
       objectReference: {fileID: 923147203}
@@ -12877,6 +12988,7 @@ MonoBehaviour:
   weaponContainer: {fileID: 490293118}
   recoilX: 0
   recoilY: 0
+  locomotionPlayer: {fileID: 1421648389}
 --- !u!195 &8689124093519957970
 NavMeshAgent:
   m_ObjectHideFlags: 0

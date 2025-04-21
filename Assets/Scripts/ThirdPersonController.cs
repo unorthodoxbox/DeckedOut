@@ -61,7 +61,7 @@ public class ThirdPersonController : MonoBehaviour
     private float deathFallSpeed = 2f;
     private float deathTiltAmount = 70f;
 
-
+    public SoundPlayer locomotionPlayer;
     void Awake()
     {
         playerStats = GetComponent<EntityStats>();
@@ -192,6 +192,7 @@ public class ThirdPersonController : MonoBehaviour
         if (isGrounded) currJumps = playerStats.numJumps; // Reset num of jumps if grounded
         if (jumpAction.triggered && currJumps > 0)
         {
+            locomotionPlayer.Play("Player Jump");
             velocity.y = Mathf.Sqrt(playerStats.jumpHeight * -2f * gravity);
             currJumps--;
         }

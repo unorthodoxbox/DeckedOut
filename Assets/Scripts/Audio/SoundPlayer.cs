@@ -28,7 +28,11 @@ public class SoundPlayer : MonoBehaviour
     // By how much do you want the delay to vary between plays?
     public float stagger = 0; 
 
+    // By how much do you want the pitch to vary each time the sound plays?
+    public float pitchJitter = 0;
+
     public string[] sounds;
+    public string[] playlist;
     int currentSound = 0;
     bool playFromSource = true;
 
@@ -48,6 +52,10 @@ public class SoundPlayer : MonoBehaviour
             }
             playFromSource = false;
         }
+        
+        if(playlist.Length == 0) {
+            playlist = sounds;
+        }
     }
 
     // Update is called once per frame
@@ -59,9 +67,9 @@ public class SoundPlayer : MonoBehaviour
         timer -= Time.deltaTime;
         if(timer < 0) {        
             if(playFromSource) {
-                audioManager.PlayFromSource(sounds[currentSound], audioSource);
+                audioManager.PlayFromSource(playlist[currentSound], audioSource);
             } else {
-                audioManager.Play(sounds[currentSound]);
+                audioManager.Play(playlist[currentSound]);
             }
             SelectSound();
             timer = delay + Random.Range(-stagger, stagger);
@@ -81,18 +89,28 @@ public class SoundPlayer : MonoBehaviour
                 break;
             case Manner.ORDER:
                 currentSound++;
-                if(currentSound >= sounds.Length){
+                if(currentSound >= playlist.Length){
                     currentSound = 0;
                 }
                 break;
             case Manner.SHUFFLE:
-                currentSound = Random.Range(0, sounds.Length);
+                currentSound = Random.Range(0, playlist.Length);
                 break;
             }
     }
-    // Play() plays a oneshot from the provided source.
+    // Play() plays a oneshot from the provided source from the PLAYLIST, taking pitchJitter into account
     public void Play() {
-        audioManager.PlayFromSource(sounds[currentSound], audioSource);
+        Sound s = audioManager.GetSound(playlist[currentSound]);
+        float pitch;
+
+        if(pitchJitter != 0) {
+            pitch = s.pitch;
+            s.pitch = pitch + Random.Range(-pitchJitter, pitchJitter);
+            audioManager.PlayFromSource(s, audioSource);
+            s.pitch = pitch;
+        } else {
+            audioManager.PlayFromSource(s, audioSource);
+        }
         SelectSound();
     }
 
@@ -100,7 +118,7 @@ public class SoundPlayer : MonoBehaviour
         audioManager.PlayFromSource(name, audioSource);
     }
     
-    public void Play(int index) {
+   /*  public void Play(int index) {
         audioManager.PlayFromSource(sounds[index], audioSource);
-    }
+    } */
 }

@@ -51,7 +51,7 @@ public class AudioManager : MonoBehaviour
         // Initialize all sound objects
         foreach(Sound sound in sounds) {
             if(sound.category == Category.OTHER) {
-                    sound.source.volume = sound.volume;
+                    //sound.source.volume = sound.volume;
             } else {
                 switch(sound.category) {
                     case Category.MUSIC:
@@ -139,7 +139,7 @@ public class AudioManager : MonoBehaviour
 
 
     
-    private Sound GetSound(string name) {
+    public Sound GetSound(string name) {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if(s == null) {
             Debug.LogWarning("Couldn't find Sound " +  name);
