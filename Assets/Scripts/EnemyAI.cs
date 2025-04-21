@@ -37,7 +37,9 @@ public class EnemyAI : MonoBehaviour
 
     private bool isAttacking = false;
 
-
+    private SoundPlayer soundPlayer;
+    public string[] dieSounds;
+    public string[] attackSounds;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
@@ -46,6 +48,7 @@ public class EnemyAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         lastAttackTime = -attackCooldown;
         lastWanderTime = Time.time;
+        soundPlayer = gameObject.GetComponent<SoundPlayer>();
 
         if (mode == BehaviorMode.Patrol || (mode == BehaviorMode.Both && patrolPoints.Length > 0))
         {
@@ -86,6 +89,7 @@ public class EnemyAI : MonoBehaviour
         if (enemyStats.currHealth <= 0 && !dead)
         {
             dead = true;
+            soundPlayer.Play(dieSounds[(int) (Random.value * dieSounds.Length)]);
             UIObject.GetComponent<AmmoUI>().killedEnemies++;
             animator.SetTrigger("Die");
             agent.isStopped = true;
@@ -143,6 +147,8 @@ public class EnemyAI : MonoBehaviour
             animator.SetFloat("Speed", 0);
             animator.ResetTrigger("Attack");
             animator.SetTrigger("Attack");
+
+            soundPlayer.Play(attackSounds[(int) (Random.value * attackSounds.Length)]); // Play a random attack sound
         }
     }
 

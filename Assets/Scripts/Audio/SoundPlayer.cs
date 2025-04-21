@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using Random = UnityEngine.Random;
@@ -29,6 +30,7 @@ public class SoundPlayer : MonoBehaviour
 
     public string[] sounds;
     int currentSound = 0;
+    bool playFromSource = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -39,6 +41,13 @@ public class SoundPlayer : MonoBehaviour
             audioSource = gameObject.AddComponent<AudioSource>(); 
         }
         
+        if(gameObject.name == "Music Player") {
+            sounds = new string[audioManager.music.Length];
+            for(int i = 0; i < audioManager.music.Length; i++) {
+                sounds[i] = audioManager.music[i].name;
+            }
+            playFromSource = false;
+        }
     }
 
     // Update is called once per frame
@@ -49,7 +58,11 @@ public class SoundPlayer : MonoBehaviour
         }
         timer -= Time.deltaTime;
         if(timer < 0) {        
-            audioManager.PlayFromSource(sounds[currentSound], audioSource);
+            if(playFromSource) {
+                audioManager.PlayFromSource(sounds[currentSound], audioSource);
+            } else {
+                audioManager.Play(sounds[currentSound]);
+            }
             SelectSound();
             timer = delay + Random.Range(-stagger, stagger);
             if(timer <= 0) {

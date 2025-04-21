@@ -6,18 +6,29 @@ using UnityEngine.Audio;
 using UnityEngine.UIElements;
 
 
+
 public class AudioManager : MonoBehaviour
 {
     // All purely organizational
+    [Header("Music")]
     [Tooltip("BGM")]
     public Sound[] music; 
-    [Tooltip("Sounds attached to the player (Collecting Cards, Getting Hit)")]
-    public Sound[] player; 
+    public int currentSong = 0; // Index in Music of the current song. Set to -1 if No Music Should Play
+    [Range(0f, 3f)]
+    public float musicVolume = .5f; // Universal music volume
+
+    [Header("UI")]
+    [Range(0f, 3f)]
+    public float uiVolume = .5f;
     [Tooltip("Sounds produced by UI")]
     public Sound[] ui;
+
+    [Header("Sounds")]
+    [Tooltip("Sounds attached to the player (Collecting Cards, Getting Hit)")]
+    public Sound[] player; 
+    
     [Tooltip("Sounds produced by entities other than the player--the kinds of things played by SoundPlayers")]
     public Sound[] sfx; // for external SFX like bugs hissing, cards humming
-
 
     private Sound[] sounds;
 
@@ -25,67 +36,86 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-        if(instance == null) {
+        /* if(instance == null) {
             instance = this;
         } else {
             Destroy(gameObject);
             return;
         }
 
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject); */
+
 
         sounds = music.Concat(player).Concat(ui).Concat(sfx).ToArray();
+
         // Initialize all sound objects
         foreach(Sound sound in sounds) {
-            if(sound.source == null) {
-                 sound.source = gameObject.AddComponent<AudioSource>();
-                 sound.source.playOnAwake = false;
+            if(sound.category == Category.OTHER) {
+                    sound.source.volume = sound.volume;
+            } else {
+                switch(sound.category) {
+                    case Category.MUSIC:
+                        sound.source.volume = musicVolume;
+                        break;
+                    case Category.UI: 
+                        sound.source.volume = uiVolume;
+                        break;
+                }
             }
-            sound.source.volume = sound.volume;
             if(sound.source.resource == null /*|| sound.source.resource != sound.clip*/) {
                     sound.source.resource = sound.clip;    
             }   
             sound.source.pitch = sound.pitch;
             sound.source.loop = sound.loop;
         }
-        Play(sounds[0]); // Should be music.
-    } 
 
-    // Plays a given sound
+    }
+
+    // Plays a given sound. Replaces an audiosource's clip.
     public void Play(Sound s) {
-        if (s == null) {
+        if(ErrorCheck(s, true, "Play") < 0) {
             return;
         }
         if(s.source.resource != s.clip) {
             s.source.resource = s.clip;
-         }
+        }
         s.source.Play();
+        Debug.Log("Playing " + s.name + "from its source.");
     }
     public void Play(string name) {
-        Sound s = GetSound(name);
-        Play(s);
+        Play(GetSound(name));
     }
 
     // Plays a sound once regardless of if it's set to loop
-    public void PlayOneShot(string name) {
-        Sound s = GetSound(name);
-        if (s == null) {
+    public void PlayOneShot(Sound s) {
+        if(ErrorCheck(s, true, "PlayOneShot") < 0) {
             return;
-        }
-                
+        }      
         s.source.PlayOneShot(s.clip, s.volume);
+    }
+
+    public void PlayOneShot(string name) {
+        PlayOneShot(GetSound(name));
     }
 
     // Plays the sound's clip from the provided AudioSource without permanently changing 
     // the sound's source or the AudioSource's clip.
-     public void PlayFromSource(string name, AudioSource source) {
-        Sound s = GetSound(name);
-        if (s == null) {
+     public void PlayFromSource(Sound s, AudioSource source) {
+        if(ErrorCheck(s, false, "PlayFromSource") < 0) {
+            return;
+        };
+        if(source == null) {
+            Debug.LogWarning("Can't PlayFromSource. " + source.name + "is null.");
             return;
         }
         source.PlayOneShot(s.clip, s.volume);
      }
 
+    public void PlayFromSource(String name, AudioSource source) {
+        PlayFromSource(GetSound(name), source);
+     }
+
+    // Not overloading these until it's required. 
     public void Stop(string name) {
         Sound s = GetSound(name);
         if(s == null) {
@@ -106,8 +136,10 @@ public class AudioManager : MonoBehaviour
             s.source.UnPause();
         }
     }
+
+
     
-    public Sound GetSound(string name) {
+    private Sound GetSound(string name) {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if(s == null) {
             Debug.LogWarning("Couldn't find Sound " +  name);
@@ -115,4 +147,22 @@ public class AudioManager : MonoBehaviour
         }
         return s;
     }
+
+    private int ErrorCheck(Sound s, bool checkSource, string op) {    
+        int status = 0;
+        if(s == null) {
+            Debug.LogWarning("Can't " + op + ". " + s.name + " is null.");
+            return -1;
+        }
+        if(s.clip == null) {
+            Debug.LogWarning("Can't " + op + ". " + s.name + " has a null clip.");
+            status--;
+        }
+        if(checkSource && s.source == null) {
+            Debug.LogWarning("Can't " + op + ". " + s.name + " has a null source.");
+            status--;
+        }
+        return status;
+    }
+
 }
