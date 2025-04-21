@@ -152,7 +152,7 @@ public class Weapon : MonoBehaviour
                     playerStats.ammoInGun--;
                 }
                 lastShotTime = Time.time;
-            }
+            } 
         }
         else if (!isRanged && Input.GetMouseButtonDown(0) && Time.time >= lastShotTime + cooldown)
         {
