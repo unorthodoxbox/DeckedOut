@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using System.Threading;
 
 
 
@@ -61,7 +62,11 @@ public class ThirdPersonController : MonoBehaviour
     private float deathFallSpeed = 2f;
     private float deathTiltAmount = 70f;
 
+    [Header("Sounds")]
     public SoundPlayer locomotionPlayer;
+    public double stepDelay = 5f;
+    private double stepTimer = .1;
+
     void Awake()
     {
         playerStats = GetComponent<EntityStats>();
@@ -79,6 +84,7 @@ public class ThirdPersonController : MonoBehaviour
 
         playerStats.RefreshStats();
         EquipWeapon(currentWeaponIndex);
+
     }
     void Start()
     {
@@ -195,9 +201,22 @@ public class ThirdPersonController : MonoBehaviour
             locomotionPlayer.Play("Player Jump");
             velocity.y = Mathf.Sqrt(playerStats.jumpHeight * -2f * gravity);
             currJumps--;
+
+            stepTimer = 0;
         }
         velocity.y += gravity * Time.deltaTime;
         controller.Move(move * currentSpeed * Time.deltaTime + velocity * Time.deltaTime);
+
+        if(isGrounded) {
+            stepTimer -= currentSpeed * Time.deltaTime;
+            if(stepTimer <= 0 ) {
+                stepTimer = stepDelay;
+                locomotionPlayer.Play();
+            }
+        } else {
+            stepTimer = .1;
+        }
+
     }
 
     void HandleCameraRotation()

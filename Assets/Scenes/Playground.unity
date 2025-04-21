@@ -283,6 +283,7 @@ MonoBehaviour:
   attackSounds:
   - Bug Bite
   - Bug Chomp
+  makeNoise: 1
 --- !u!195 &16438672
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -419,7 +420,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &52920663
 RectTransform:
   m_ObjectHideFlags: 0
@@ -648,6 +649,7 @@ MonoBehaviour:
   attackSounds:
   - Bug Bite
   - Bug Chomp
+  makeNoise: 1
 --- !u!195 &67219481
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3270,7 +3272,7 @@ RectTransform:
   m_Father: {fileID: 52920663}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3454,22 +3456,22 @@ MonoBehaviour:
     source: {fileID: 741775436}
     clip: {fileID: 8300000, guid: 12fc97705183842c1b42bef156111c7d, type: 3}
     category: 0
-    volume: 1
-    pitch: 1
+    volume: 0.197
+    pitch: 0.75
     loop: 0
   - name: Player Step2
     source: {fileID: 741775436}
     clip: {fileID: 8300000, guid: f4c52e29bb36d4cec954c548de9be9d8, type: 3}
     category: 0
-    volume: 1
-    pitch: 1
+    volume: 0.177
+    pitch: 0.75
     loop: 0
   - name: Player Jump
     source: {fileID: 741775436}
     clip: {fileID: 8300000, guid: 70d5bd728bbdb43b4b66d38765c4c806, type: 3}
     category: 0
     volume: 1
-    pitch: 1
+    pitch: 0.92
     loop: 0
   sfx:
   - name: Bug Hiss
@@ -3887,6 +3889,7 @@ MonoBehaviour:
   attackSounds:
   - Bug Bite
   - Bug Chomp
+  makeNoise: 1
 --- !u!195 &634009232
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5098,6 +5101,7 @@ MonoBehaviour:
   attackSounds:
   - Bug Bite
   - Bug Chomp
+  makeNoise: 1
 --- !u!195 &881491595
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5681,6 +5685,7 @@ MonoBehaviour:
   attackSounds:
   - Bug Bite
   - Bug Chomp
+  makeNoise: 1
 --- !u!195 &912061364
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -6447,6 +6452,7 @@ MonoBehaviour:
   attackSounds:
   - Bug Bite
   - Bug Chomp
+  makeNoise: 1
 --- !u!195 &1091913773
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7821,6 +7827,7 @@ MonoBehaviour:
   attackSounds:
   - Bug Bite
   - Bug Chomp
+  makeNoise: 1
 --- !u!195 &1238688943
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -8035,6 +8042,7 @@ MonoBehaviour:
   attackSounds:
   - Bug Bite
   - Bug Chomp
+  makeNoise: 1
 --- !u!195 &1307616101
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -8253,6 +8261,7 @@ MonoBehaviour:
   attackSounds:
   - Bug Bite
   - Bug Chomp
+  makeNoise: 1
 --- !u!195 &1308674022
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -10339,6 +10348,7 @@ MonoBehaviour:
   attackSounds:
   - Bug Bite
   - Bug Chomp
+  makeNoise: 1
 --- !u!195 &1692592416
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -11736,6 +11746,7 @@ MonoBehaviour:
   attackSounds:
   - Bug Bite
   - Bug Chomp
+  makeNoise: 1
 --- !u!195 &1942863121
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -12025,6 +12036,7 @@ MonoBehaviour:
   attackSounds:
   - Bug Bite
   - Bug Chomp
+  makeNoise: 1
 --- !u!195 &1992162052
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -12830,6 +12842,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 676808459}
     - target: {fileID: 1806510467243792130, guid: e803dacf199e56f46b923633453df7a1, type: 3}
+      propertyPath: stepDelay
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806510467243792130, guid: e803dacf199e56f46b923633453df7a1, type: 3}
       propertyPath: weapons.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -12989,6 +13005,7 @@ MonoBehaviour:
   recoilX: 0
   recoilY: 0
   locomotionPlayer: {fileID: 1421648389}
+  stepDelay: 2
 --- !u!195 &8689124093519957970
 NavMeshAgent:
   m_ObjectHideFlags: 0

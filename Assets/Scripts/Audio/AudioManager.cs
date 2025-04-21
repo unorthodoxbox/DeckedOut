@@ -61,12 +61,8 @@ public class AudioManager : MonoBehaviour
                         sound.source.volume = uiVolume;
                         break;
                 }
-            }
-            if(sound.source.resource == null /*|| sound.source.resource != sound.clip*/) {
-                    sound.source.resource = sound.clip;    
-            }   
-            sound.source.pitch = sound.pitch;
-            sound.source.loop = sound.loop;
+            } 
+            
         }
 
     }
@@ -76,11 +72,13 @@ public class AudioManager : MonoBehaviour
         if(ErrorCheck(s, true, "Play") < 0) {
             return;
         }
+        if(s.source != null) {
+                s.source.loop = s.loop;
+        }
         if(s.source.resource != s.clip) {
             s.source.resource = s.clip;
         }
         s.source.Play();
-        Debug.Log("Playing " + s.name + "from its source.");
     }
     public void Play(string name) {
         Play(GetSound(name));

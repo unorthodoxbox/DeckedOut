@@ -40,6 +40,7 @@ public class EnemyAI : MonoBehaviour
     private SoundPlayer soundPlayer;
     public string[] dieSounds;
     public string[] attackSounds;
+    public bool makeNoise = true;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
@@ -89,7 +90,11 @@ public class EnemyAI : MonoBehaviour
         if (enemyStats.currHealth <= 0 && !dead)
         {
             dead = true;
-            soundPlayer.Play(dieSounds[(int) (Random.value * dieSounds.Length)]);
+            if(makeNoise) {
+                soundPlayer.Play(dieSounds[(int) (Random.value * dieSounds.Length)]);
+                makeNoise = false;
+                enemyStats.makeNoiseOnHurt = false;
+            }
             UIObject.GetComponent<AmmoUI>().killedEnemies++;
             animator.SetTrigger("Die");
             agent.isStopped = true;
@@ -148,7 +153,7 @@ public class EnemyAI : MonoBehaviour
             animator.ResetTrigger("Attack");
             animator.SetTrigger("Attack");
 
-            soundPlayer.Play(attackSounds[(int) (Random.value * attackSounds.Length)]); // Play a random attack sound
+            if(makeNoise) soundPlayer.Play(attackSounds[(int) (Random.value * attackSounds.Length)]); // Play a random attack sound
         }
     }
 
