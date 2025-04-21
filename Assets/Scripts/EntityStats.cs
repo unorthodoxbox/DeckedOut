@@ -45,12 +45,20 @@ public class EntityStats : MonoBehaviour
     public HealthBar healthBar;
     public ProgressBar playerHealthBar;
 
+    [Header("Sound Settings")]
+    public bool makeNoiseOnHurt = false; 
+    public bool makeNoiseOnDie = false;
+
+    public SoundPlayer soundPlayer;
+    public string prefix; //"<prefix> Hurt"
+
     [Header("Player Settings")]
     public bool isPlayer = false;
     public Material lowHPMaterial;
 
     private Coroutine flashRoutine;
     private bool isDead = false;
+
 
     // Card Variables
     //[HideInInspector]
@@ -68,6 +76,10 @@ public class EntityStats : MonoBehaviour
         {
             lowHPMaterial.SetFloat("_Alpha", 0);
         }
+
+        if(soundPlayer == null) {
+            soundPlayer = gameObject.GetComponent<SoundPlayer>();
+        }
     }
     public void RefreshStats()
     {
@@ -81,6 +93,10 @@ public class EntityStats : MonoBehaviour
     {
         currHealth -= damage;
         Debug.Log(gameObject.name + " health is now " + currHealth);
+        if(!isDead && makeNoiseOnHurt) {
+            soundPlayer?.Play(prefix + " Hurt");
+
+        }
         if (isPlayer && !isDead)
         {
             playerHealthBar.SetProgress(currHealth / maxHealth);
@@ -94,6 +110,10 @@ public class EntityStats : MonoBehaviour
                 isDead = true;
                 GetComponent<ThirdPersonController>().TriggerDeath();
                 // Optionally play a death SFX, screen fade, etc.
+                if(makeNoiseOnDie) {
+                    soundPlayer?.Play(prefix + " Die");
+                    makeNoiseOnHurt = false;
+                }
             }
         }
         else

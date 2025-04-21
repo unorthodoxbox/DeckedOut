@@ -450,6 +450,10 @@ MonoBehaviour:
   currHealth: 100
   healthBar: {fileID: 1225811695955041916}
   playerHealthBar: {fileID: 0}
+  makeNoiseOnHurt: 1
+  makeNoiseOnDie: 0
+  soundPlayer: {fileID: 0}
+  prefix: Bug
   isPlayer: 0
   lowHPMaterial: {fileID: 0}
   statCards: []

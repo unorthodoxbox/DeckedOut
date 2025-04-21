@@ -25,7 +25,7 @@ public class Sound {
     public float volume = 1;
     [Range(0f, 3f)]
     public float pitch = 1;
-
     public bool loop;
+    
 
 }
