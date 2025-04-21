@@ -16,6 +16,7 @@ AudioMixerGroupController:
   m_Effects:
   - {fileID: 9001150694947351967}
   - {fileID: -1495235037297032883}
+  - {fileID: -2841658587991563208}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -89,6 +90,48 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &-2841658587991563208
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: a48255fe4143c4f8897dfd59b9df7de4
+  m_EffectName: SFX Reverb
+  m_MixLevel: 6bf3599100c0c420eb4309ffc29977a4
+  m_Parameters:
+  - m_ParameterName: Dry Level
+    m_GUID: 5c404c609dc5c44dbb9fe671583131e0
+  - m_ParameterName: Room
+    m_GUID: 93672c556a4fb4ba5a2c6f7ccc61e0d8
+  - m_ParameterName: Room HF
+    m_GUID: fb8b4c8831a924681ad8cfc7a047a705
+  - m_ParameterName: Decay Time
+    m_GUID: 6fff3f85100b94795a4967b26cd405e3
+  - m_ParameterName: Decay HF Ratio
+    m_GUID: 68673f4297b0b410d9516d19c37aeeab
+  - m_ParameterName: Reflections
+    m_GUID: b4a5767c3559a4b9aa4426720fd7b127
+  - m_ParameterName: Reflect Delay
+    m_GUID: c7a93cb31417c475b9ea1ff40379dac3
+  - m_ParameterName: Reverb
+    m_GUID: 945fb357f5cca45af8e61606a4ab4f22
+  - m_ParameterName: Reverb Delay
+    m_GUID: dc61c7686810a4764bc76e893ec18084
+  - m_ParameterName: Diffusion
+    m_GUID: e3d5cc1ed4daa43f78817235046546f2
+  - m_ParameterName: Density
+    m_GUID: 847f384538b344b94b23ec2ea2711c23
+  - m_ParameterName: HF Reference
+    m_GUID: bbedd6bc0fdef4588992e8d9e3c0e5d5
+  - m_ParameterName: Room LF
+    m_GUID: 41ed57338c07d4d378d2cffa6caede43
+  - m_ParameterName: LF Reference
+    m_GUID: 4e3472db72674472b84cf4e0ddedafa8
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &-1495235037297032883
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -179,13 +222,19 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: c1b391aceeaff4c56892ba88b022f618
   m_FloatValues:
+    68673f4297b0b410d9516d19c37aeeab: 0.4
     9022b79291a294b80bc641104556a39d: -3.8468575
     10ca3d332c3db46f9960e1f1b1501ae1: 3.04
+    93672c556a4fb4ba5a2c6f7ccc61e0d8: -4619
+    945fb357f5cca45af8e61606a4ab4f22: 3
     59d89e67a26fe41fab78b559736c8cb8: 0.86999977
+    dc61c7686810a4764bc76e893ec18084: 0.0552
     e9cff4c8184bd4eeebe8b3a24a076df1: 4980.33
     05ac386a8fbb74f14ac5d4ddab56d3af: 59.15297
     81f5c7da83038406fb21a1fd6e92096f: 0
     c3bc90db23bc24a99b429ed04033e609: 49.023323
+    4e3472db72674472b84cf4e0ddedafa8: 194
+    b4a5767c3559a4b9aa4426720fd7b127: -7534
     2006697de23674e0ab2588234516cb6d: 1.160001
     345ae1fd7901747fb9676487fbf647ce: 1.3399997
   m_TransitionOverrides: {}

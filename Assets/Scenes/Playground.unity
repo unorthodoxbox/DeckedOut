@@ -3402,29 +3402,43 @@ MonoBehaviour:
     pitch: 1
     loop: 0
   - name: AR Shot
-    source: {fileID: 741775436}
+    source: {fileID: 776370097}
     clip: {fileID: 8300000, guid: c6c63d531a84947a7b05f3343f7a9076, type: 3}
     category: 0
-    volume: 1
-    pitch: 1
+    volume: 0.858
+    pitch: 0.75
     loop: 0
   - name: AR Reload
-    source: {fileID: 741775436}
-    clip: {fileID: 0}
+    source: {fileID: 776370097}
+    clip: {fileID: 8300000, guid: 36c96275128bf4c3b967fe5839bfc58f, type: 3}
     category: 0
-    volume: 1
+    volume: 0.696
     pitch: 1
     loop: 0
   - name: Pistol Shot
-    source: {fileID: 741775436}
+    source: {fileID: 776370097}
     clip: {fileID: 8300000, guid: af7a29ca9c71543719c4e9ad0b500252, type: 3}
     category: 0
-    volume: 1
+    volume: 0.902
     pitch: 1
     loop: 0
   - name: Pistol Reload
     source: {fileID: 741775436}
     clip: {fileID: 0}
+    category: 0
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: AR Empty
+    source: {fileID: 776370097}
+    clip: {fileID: 8300000, guid: 8f470e23c92054cb99e2281ac1da82b1, type: 3}
+    category: 0
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Pistol Empty
+    source: {fileID: 776370097}
+    clip: {fileID: 8300000, guid: 8f470e23c92054cb99e2281ac1da82b1, type: 3}
     category: 0
     volume: 1
     pitch: 1
@@ -4498,7 +4512,6 @@ GameObject:
   - component: {fileID: 776370099}
   - component: {fileID: 776370097}
   - component: {fileID: 776370096}
-  - component: {fileID: 776370098}
   m_Layer: 0
   m_Name: Weapon Player
   m_TagString: Untagged
@@ -4532,7 +4545,7 @@ AudioSource:
   m_GameObject: {fileID: 776370095}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -2917048079298757344, guid: e5c851cdcd29c49748d6b2e9ef847604, type: 2}
+  OutputAudioMixerGroup: {fileID: -8583545641526041161, guid: e5c851cdcd29c49748d6b2e9ef847604, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -4620,29 +4633,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!164 &776370098
-AudioReverbFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 776370095}
-  m_Enabled: 1
-  m_DryLevel: 0
-  m_Room: -1000
-  m_RoomHF: 0
-  m_DecayTime: 1.65
-  m_DecayHFRatio: 1.5
-  m_ReflectionsLevel: -1363
-  m_ReverbLevel: -1153
-  m_ReverbDelay: 0.012
-  m_Diffusion: 100
-  m_Density: 100
-  m_HFReference: 5000
-  m_RoomLF: 0
-  m_LFReference: 250
-  m_ReflectionsDelay: 0
-  m_ReverbPreset: 21
 --- !u!4 &776370099
 Transform:
   m_ObjectHideFlags: 0
