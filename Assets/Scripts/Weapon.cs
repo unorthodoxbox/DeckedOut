@@ -57,6 +57,10 @@ public class Weapon : MonoBehaviour
     private Quaternion initialLocalRot;
     private Quaternion targetLocalRot;
 
+    [Header("Sound Settings")]
+    public SoundPlayer weaponSoundPlayer; // Serialized because it might change
+    public string soundPrefix;
+
 
     void Start()
     {
@@ -159,6 +163,8 @@ public class Weapon : MonoBehaviour
         // Reload
         if (Input.GetKeyDown(KeyCode.R) && playerStats.totalAmmo > 0)
         {
+            weaponSoundPlayer.Play(soundPrefix + " Reload"); 
+            
             float needed = playerStats.clipSize - playerStats.ammoInGun;
             float reloadAmount = Mathf.Min(needed, playerStats.totalAmmo);
             playerStats.ammoInGun += reloadAmount;
@@ -168,6 +174,8 @@ public class Weapon : MonoBehaviour
 
     void Shoot()
     {
+        weaponSoundPlayer.Play(soundPrefix + " Shot");
+
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
 
         Vector3 targetPoint;
@@ -219,6 +227,7 @@ public class Weapon : MonoBehaviour
 
     System.Collections.IEnumerator Swing()
     {
+        weaponSoundPlayer.Play(soundPrefix + "Swing");
         GetComponent<BoxCollider>().enabled = true;
         yield return new WaitForSeconds(1f);
         GetComponent<BoxCollider>().enabled = false;

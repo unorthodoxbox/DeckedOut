@@ -529,7 +529,7 @@ MonoBehaviour:
   - Bug Die
   attackSounds:
   - Bug Bite
-  - Bug Bite
+  - Bug Chomp
 --- !u!114 &-5961421524020284660
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -53,7 +53,7 @@ public class SoundPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(audioSource.isPlaying == true || manner == Manner.STOP) {
+        if(audioSource.isPlaying == true || manner == Manner.STOP || sounds.Length == 0) {
             return;    
         }
         timer -= Time.deltaTime;
