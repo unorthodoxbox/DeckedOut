@@ -77,13 +77,17 @@ public class SoundPlayer : MonoBehaviour
                 break;
             }
     }
+    // Play() plays a oneshot from the provided source.
     public void Play() {
         audioManager.PlayFromSource(sounds[currentSound], audioSource);
         SelectSound();
     }
 
     public void Play(string name) {
-        audioSource.Stop();
         audioManager.PlayFromSource(name, audioSource);
+    }
+    
+    public void Play(int index) {
+        audioManager.PlayFromSource(sounds[index], audioSource);
     }
 }

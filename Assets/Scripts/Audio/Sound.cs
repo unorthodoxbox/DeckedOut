@@ -15,7 +15,4 @@ public class Sound {
 
     public bool loop;
 
-
-
-
 }

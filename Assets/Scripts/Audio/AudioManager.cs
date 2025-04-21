@@ -1,12 +1,25 @@
 using System;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UIElements;
 
 
 public class AudioManager : MonoBehaviour
 {
-    public Sound[] sounds;
+    // All purely organizational
+    [Tooltip("BGM")]
+    public Sound[] music; 
+    [Tooltip("Sounds attached to the player (Collecting Cards, Getting Hit)")]
+    public Sound[] player; 
+    [Tooltip("Sounds produced by UI")]
+    public Sound[] ui;
+    [Tooltip("Sounds produced by entities other than the player--the kinds of things played by SoundPlayers")]
+    public Sound[] sfx; // for external SFX like bugs hissing, cards humming
+
+
+    private Sound[] sounds;
 
     public static AudioManager instance;
 
@@ -20,6 +33,8 @@ public class AudioManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+
+        sounds = music.Concat(player).Concat(ui).Concat(sfx).ToArray();
         // Initialize all sound objects
         foreach(Sound sound in sounds) {
             if(sound.source == null) {
@@ -32,12 +47,12 @@ public class AudioManager : MonoBehaviour
             }   
             sound.source.pitch = sound.pitch;
             sound.source.loop = sound.loop;
-          }
+        }
+        Play(sounds[0]); // Should be music.
     } 
 
     // Plays a given sound
-    public void Play(string name) {
-        Sound s = GetSound(name);
+    public void Play(Sound s) {
         if (s == null) {
             return;
         }
@@ -45,6 +60,10 @@ public class AudioManager : MonoBehaviour
             s.source.resource = s.clip;
          }
         s.source.Play();
+    }
+    public void Play(string name) {
+        Sound s = GetSound(name);
+        Play(s);
     }
 
     // Plays a sound once regardless of if it's set to loop
@@ -88,7 +107,7 @@ public class AudioManager : MonoBehaviour
         }
     }
     
-    private Sound GetSound(string name) {
+    public Sound GetSound(string name) {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if(s == null) {
             Debug.LogWarning("Couldn't find Sound " +  name);
