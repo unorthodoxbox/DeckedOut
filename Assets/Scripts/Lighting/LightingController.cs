@@ -19,6 +19,8 @@ public class LightingController : MonoBehaviour
     [SerializeField] private Color dayGroundColor = new Color32(0x75, 0x64, 0x98, 0xFF);
     [SerializeField] private Color nightGroundColor = new Color32(0x16, 0x08, 0x33, 0xFF);
 
+    [SerializeField] private Light MoonLight;
+
     void Start()
     {
         Debug.Log("Current skybox material: " + RenderSettings.skybox);
@@ -52,9 +54,9 @@ public class LightingController : MonoBehaviour
         RenderSettings.fogColor = Preset.FogColor.Evaluate(timePercent);
 
         //minimum night time lighting
-        if (timePercent < 0.2f)
+        if (timePercent < 0.2f || timePercent > 0.8f)
         {
-            RenderSettings.ambientLight = new Color(0.1f, 0.1f, 0.1f);
+            RenderSettings.ambientLight = new Color(0.25f, 0.25f, 0.25f);
         }
 
         if (DirectionalLight != null)
@@ -63,6 +65,31 @@ public class LightingController : MonoBehaviour
             //DirectionalLight.color = Preset.DirectionalColor.Evaluate(timePercent);
             DirectionalLight.transform.localRotation = Quaternion.Euler(new Vector3((timePercent * 360f) - 90f, 170f, 0));
         }
+
+        //extra moon light check
+        if (MoonLight != null)
+        {
+            bool isNight = (timePercent < 0.2f || timePercent > 0.8f);
+            MoonLight.enabled = isNight;
+
+            if (isNight)
+            {
+                float fade = 1f;
+
+                //fading strength of moon 
+                if (timePercent < 0.2f)
+                    fade = Mathf.InverseLerp(0.1f, 0.2f, timePercent); //dawn
+                else if (timePercent > 0.8f)
+                    fade = Mathf.InverseLerp(1.0f, 0.8f, timePercent); //dusk
+
+                //MoonLight.intensity = Mathf.Lerp(0f, 0.3f, fade);
+            }
+            else
+            {
+                //MoonLight.intensity = 0f;
+            }
+        }
+
 
         UpdateAtmosphereThickness(timePercent);
         UpdateSkyboxColors(timePercent);
