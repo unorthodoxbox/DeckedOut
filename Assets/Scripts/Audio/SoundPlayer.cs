@@ -4,6 +4,7 @@ using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
+using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 public enum Manner {
     STOP, // SoundPlayer will only play when Play is called

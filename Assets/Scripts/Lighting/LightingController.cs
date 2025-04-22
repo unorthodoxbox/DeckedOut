@@ -56,7 +56,7 @@ public class LightingController : MonoBehaviour
         //minimum night time lighting
         if (timePercent < 0.2f || timePercent > 0.8f)
         {
-            RenderSettings.ambientLight = new Color(0.25f, 0.25f, 0.25f);
+            RenderSettings.ambientLight = new Color(0.1f, 0.1f, 0.1f);
         }
 
         if (DirectionalLight != null)
