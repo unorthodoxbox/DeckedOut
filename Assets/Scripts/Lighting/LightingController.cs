@@ -21,11 +21,11 @@ public class LightingController : MonoBehaviour
 
     [SerializeField] private Light MoonLight;
 
-    void Start()
-    {
-        Debug.Log("Current skybox material: " + RenderSettings.skybox);
-        Debug.Log("Skybox shader: " + RenderSettings.skybox.shader.name);
-    }
+    //void Start()
+    //{
+    //    Debug.Log("Current skybox material: " + RenderSettings.skybox);
+    //    Debug.Log("Skybox shader: " + RenderSettings.skybox.shader.name);
+    //}
 
     // Update is called once per frame
     void Update()
