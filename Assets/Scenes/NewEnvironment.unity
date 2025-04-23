@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0.44851005, g: 0.2805714, b: 0.6132076, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.003
+  m_FogDensity: 0.005
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.1, g: 0.1, b: 0.1, a: 1}
@@ -35,7 +35,7 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 1
+  m_ReflectionIntensity: 0.871
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
   m_UseRadianceAmbientProbe: 0
@@ -4071,6 +4071,22 @@ PrefabInstance:
     - target: {fileID: 721352640082671124, guid: b7ce959dd57f8ef479fda5c8e2e5af0a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294071890968014209, guid: b7ce959dd57f8ef479fda5c8e2e5af0a, type: 3}
+      propertyPath: m_Color.b
+      value: 0.80784315
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294071890968014209, guid: b7ce959dd57f8ef479fda5c8e2e5af0a, type: 3}
+      propertyPath: m_Color.g
+      value: 0.37254906
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294071890968014209, guid: b7ce959dd57f8ef479fda5c8e2e5af0a, type: 3}
+      propertyPath: m_Color.r
+      value: 0.37665758
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294071890968014209, guid: b7ce959dd57f8ef479fda5c8e2e5af0a, type: 3}
+      propertyPath: m_Intensity
+      value: 50000
       objectReference: {fileID: 0}
     - target: {fileID: 8363986715324652789, guid: b7ce959dd57f8ef479fda5c8e2e5af0a, type: 3}
       propertyPath: m_Name
