@@ -1,9 +1,11 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
 
 
@@ -92,6 +94,13 @@ public class AudioManager : MonoBehaviour
         createPlayerAudio();
 
         
+    }
+
+    void OnEnable()
+    {
+           if(SceneManager.GetActiveScene().name == "Title Screen") {
+                Play("TitleLoop");
+           }
     }
 
 
@@ -207,6 +216,7 @@ public class AudioManager : MonoBehaviour
             // Assuming that the player won't exist in the title screen
             playerObject = GameObject.FindWithTag("MainCamera");
         }
+
         if(playerAudio == null) {
             createPlayerAudio();
         }
@@ -221,7 +231,7 @@ public class AudioManager : MonoBehaviour
                 playerAudioTransform = playerObject.transform.Find("Player Audio");
             } catch (NullReferenceException) {
                 playerAudio = Instantiate(playerAudioPrefab, playerObject.transform);
-
+                playerAudioTransform = playerAudio.transform;
             }
 
             // assignPlayerAudio
