@@ -1956,8 +1956,8 @@ MonoBehaviour:
   waveSize: 5
   waveGrowthSize: 5
   currentWave: 1
-  numChestsPerWave: 10
-  numAmmoCratesPerWave: 20
+  numChestsPerWave: 3
+  numAmmoCratesPerWave: 3
 --- !u!4 &583635242
 Transform:
   m_ObjectHideFlags: 0
@@ -1985,7 +1985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 117672e80e2f2d44f956a68b1ecb478c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRadius: 275
+  spawnRadius: 60
   maxAttemptsPerObject: 100
 --- !u!1 &600116228 stripped
 GameObject:
