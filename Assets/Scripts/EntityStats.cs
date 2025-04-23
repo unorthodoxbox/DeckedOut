@@ -75,8 +75,9 @@ public class EntityStats : MonoBehaviour
         if (isPlayer)
         {
             lowHPMaterial.SetFloat("_Alpha", 0);
-            soundPlayer = AudioManager.GetSoundPlayer("SFX");
-        }
+            soundPlayer = AudioManager.sfxPlayer.GetComponent<SoundPlayer>();
+            prefix = "Player";
+        } 
 
         if(soundPlayer == null) {
             soundPlayer = gameObject.GetComponent<SoundPlayer>();
@@ -96,7 +97,6 @@ public class EntityStats : MonoBehaviour
         Debug.Log(gameObject.name + " health is now " + currHealth);
         if(!isDead && makeNoiseOnHurt) {
             soundPlayer?.Play(prefix + " Hurt");
-
         }
         if (isPlayer && !isDead)
         {

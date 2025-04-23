@@ -63,7 +63,6 @@ public class ThirdPersonController : MonoBehaviour
     private float deathTiltAmount = 70f;
 
     [Header("Sounds")]
-    private SoundPlayer locomotionPlayer;
     public double stepDelay = 5f;
     private double stepTimer = .1;
 
@@ -84,6 +83,7 @@ public class ThirdPersonController : MonoBehaviour
 
         playerStats.RefreshStats();
         EquipWeapon(currentWeaponIndex);
+        AudioManager.playerExists.Invoke();
 
     }
     void Start()
@@ -96,10 +96,9 @@ public class ThirdPersonController : MonoBehaviour
         {
             depthOfField.active = false;
         }
-
-        locomotionPlayer = AudioManager.GetSoundPlayer("Locomotion");
-
     }
+
+
     IEnumerator FadeToGrayscale(float duration = 1f)
     {
         if (colorAdjustments == null) yield break;
@@ -200,7 +199,7 @@ public class ThirdPersonController : MonoBehaviour
         if (isGrounded) currJumps = playerStats.numJumps; // Reset num of jumps if grounded
         if (jumpAction.triggered && currJumps > 0)
         {
-            locomotionPlayer.Play("Player Jump");
+            AudioManager.locomotionPlayer.GetComponent<SoundPlayer>().Play("Player Jump");
             velocity.y = Mathf.Sqrt(playerStats.jumpHeight * -2f * gravity);
             currJumps--;
 
@@ -209,11 +208,11 @@ public class ThirdPersonController : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(move * currentSpeed * Time.deltaTime + velocity * Time.deltaTime);
 
-        if(isGrounded) {
+        if(isGrounded && velocity.magnitude > 0) {
             stepTimer -= currentSpeed * Time.deltaTime;
             if(stepTimer <= 0 ) {
                 stepTimer = stepDelay;
-                locomotionPlayer.Play();
+                AudioManager.locomotionPlayer.GetComponent<SoundPlayer>().Play();
             }
         } else {
             stepTimer = .1;

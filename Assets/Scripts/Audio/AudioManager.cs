@@ -1,11 +1,9 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.UIElements;
+using UnityEngine.Events;
 using Debug = UnityEngine.Debug;
 
 
@@ -23,11 +21,11 @@ public class AudioManager : MonoBehaviour
     public float musicVolume = .5f; // Universal music volume
 
     [Header("UI")]
-    
+
     [Range(0f, 3f)]
     public float uiVolume = .5f;
 
-    // [Tooltip("Sounds produced by UI")]
+    [Tooltip("Sounds produced by UI")]
     public Sound[] ui;
 
     [Header("Sounds")]
@@ -42,9 +40,13 @@ public class AudioManager : MonoBehaviour
     private static AudioManager instance;
 
     private static GameObject playerAudio;
-    private AudioSource musicSource;
-    private AudioSource weaponSource;
-    private AudioSource sfxSource;
+    public static GameObject musicPlayer;
+    public static GameObject weaponPlayer;
+    
+    public static  GameObject sfxPlayer;
+    public static GameObject locomotionPlayer;
+
+    public static UnityEvent playerExists;
 
     
 
@@ -65,6 +67,10 @@ public class AudioManager : MonoBehaviour
         sounds = music.Concat(player).Concat(ui).Concat(sfx).ToArray();
         autoInstantiate();
 
+        if(playerExists == null) {
+            playerExists = new UnityEvent();
+            playerExists.AddListener(attachToPlayer);
+        }
 
         // Initialize all sound objects
         foreach(Sound sound in sounds) {
@@ -73,7 +79,7 @@ public class AudioManager : MonoBehaviour
             } else {
                 switch(sound.category) {
                     case Category.MUSIC:
-                        sound.source = musicSource;
+                        sound.source = musicPlayer.GetComponent<AudioSource>();
                         sound.source.volume = musicVolume;
                         break;
                     case Category.UI: 
@@ -83,7 +89,9 @@ public class AudioManager : MonoBehaviour
             } 
             
         }
+        createPlayerAudio();
 
+        
     }
 
 
@@ -169,10 +177,7 @@ public class AudioManager : MonoBehaviour
             return null;
         }
     }
-
-    public static SoundPlayer GetSoundPlayer(string title){
-            return playerAudio.transform.Find(title + " Player").GetComponent<SoundPlayer>();
-    }
+     
 
     private int ErrorCheck(Sound s, bool checkSource, string op) {    
         int status = 0;
@@ -193,7 +198,6 @@ public class AudioManager : MonoBehaviour
 
     private void autoInstantiate() {
         if(playerObject == null) {
-            Debug.LogWarning("AudioManager doesn't have the player. Finding...");
             // We assume that there's a player in the scene.
             playerObject =  GameObject.FindWithTag("Player");
         }
@@ -222,13 +226,26 @@ public class AudioManager : MonoBehaviour
 
             // assignPlayerAudio
             playerAudio = playerAudioTransform.gameObject;
-            musicSource = playerAudioTransform.Find("Music Player").GetComponent<AudioSource>();
-            weaponSource = playerAudioTransform.Find("Weapon Player").GetComponent<AudioSource>();
-            sfxSource = playerAudioTransform.Find("SFX Player").GetComponent<AudioSource>();
+
+            musicPlayer = playerAudioTransform.Find("Music Player").gameObject;
+            weaponPlayer = playerAudioTransform.Find("Weapon Player").gameObject;
+            sfxPlayer = playerAudioTransform.Find("SFX Player").gameObject;
+            locomotionPlayer = playerAudioTransform.Find("Locomotion Player").gameObject;
+
             return playerAudio;
 
     }
 
+    private void attachToPlayer() {
+        if(playerObject == null || playerObject.tag == "MainCamera") { 
+                playerObject =  GameObject.FindWithTag("Player");
+                if(playerObject.tag == "MainCamera") {
+                    Destroy(playerAudio);
+                }
+                createPlayerAudio();
 
+        }
+
+    }
 
 }

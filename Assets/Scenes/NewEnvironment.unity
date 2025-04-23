@@ -514,6 +514,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4230097021714231523, guid: c173bd2b16d2e1a43861bd49f58cba82, type: 3}
+      propertyPath: prefix
+      value: Bug
+      objectReference: {fileID: 0}
     - target: {fileID: 5599921833574029125, guid: c173bd2b16d2e1a43861bd49f58cba82, type: 3}
       propertyPath: UIObject
       value: 
@@ -1903,7 +1907,6 @@ MonoBehaviour:
   recoilKickback: {x: 0, y: 0, z: -0.1}
   recoilRotation: {x: -5, y: 1, z: 1}
   visualRecoilRecovery: 15
-  weaponSoundPlayer: {fileID: 0}
   soundPrefix: Pistol
 --- !u!1001 &639344542
 PrefabInstance:
@@ -6180,7 +6183,7 @@ MonoBehaviour:
   currHealth: 100
   healthBar: {fileID: 0}
   playerHealthBar: {fileID: 923147203}
-  makeNoiseOnHurt: 0
+  makeNoiseOnHurt: 1
   makeNoiseOnDie: 0
   soundPlayer: {fileID: 0}
   prefix: 
@@ -6440,7 +6443,6 @@ MonoBehaviour:
   recoilKickback: {x: 0, y: 0, z: -0.1}
   recoilRotation: {x: 2, y: 1, z: 1}
   visualRecoilRecovery: 30
-  weaponSoundPlayer: {fileID: 0}
   soundPrefix: AR
 --- !u!23 &5252918155554803422
 MeshRenderer:
@@ -6534,6 +6536,14 @@ PrefabInstance:
     - target: {fileID: 195075848511131794, guid: e803dacf199e56f46b923633453df7a1, type: 3}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 536757938043111224, guid: e803dacf199e56f46b923633453df7a1, type: 3}
+      propertyPath: prefix
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 536757938043111224, guid: e803dacf199e56f46b923633453df7a1, type: 3}
+      propertyPath: makeNoiseOnHurt
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 536757938043111224, guid: e803dacf199e56f46b923633453df7a1, type: 3}
       propertyPath: playerHealthBar
@@ -6767,7 +6777,6 @@ MonoBehaviour:
   weaponContainer: {fileID: 490293118}
   recoilX: 0
   recoilY: 0
-  locomotionPlayer: {fileID: 0}
   stepDelay: 2
 --- !u!195 &8689124093519957970
 NavMeshAgent:
