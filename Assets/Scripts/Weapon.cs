@@ -58,7 +58,7 @@ public class Weapon : MonoBehaviour
     private Quaternion targetLocalRot;
 
     [Header("Sound Settings")]
-    public SoundPlayer weaponSoundPlayer; // Serialized because it might change
+    private SoundPlayer weaponSoundPlayer;
     public string soundPrefix;
 
 
@@ -74,6 +74,8 @@ public class Weapon : MonoBehaviour
             initialLocalRot = weaponVisual.localRotation;
             targetLocalRot = initialLocalRot;
         }
+
+        weaponSoundPlayer = AudioManager.GetSoundPlayer("Weapon");
     }
 
 

@@ -1,14 +1,19 @@
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UIElements;
+using Debug = UnityEngine.Debug;
 
 
 
 public class AudioManager : MonoBehaviour
 {
+    public static GameObject playerObject;
+    public static GameObject playerAudioPrefab;
     // All purely organizational
     [Header("Music")]
     [Tooltip("BGM")]
@@ -18,9 +23,11 @@ public class AudioManager : MonoBehaviour
     public float musicVolume = .5f; // Universal music volume
 
     [Header("UI")]
+    
     [Range(0f, 3f)]
     public float uiVolume = .5f;
-    [Tooltip("Sounds produced by UI")]
+
+    // [Tooltip("Sounds produced by UI")]
     public Sound[] ui;
 
     [Header("Sounds")]
@@ -32,7 +39,15 @@ public class AudioManager : MonoBehaviour
 
     private Sound[] sounds;
 
-    public static AudioManager instance;
+    private static AudioManager instance;
+
+    private static GameObject playerAudio;
+    private AudioSource musicSource;
+    private AudioSource weaponSource;
+    private AudioSource sfxSource;
+
+    
+
 
     void Awake()
     {
@@ -43,10 +58,13 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        DontDestroyOnLoad(gameObject); */
+        DontDestroyOnLoad(gameObject);
+        */
 
-
+        Debug.Log("Instantiating sounds.");
         sounds = music.Concat(player).Concat(ui).Concat(sfx).ToArray();
+        autoInstantiate();
+
 
         // Initialize all sound objects
         foreach(Sound sound in sounds) {
@@ -55,6 +73,7 @@ public class AudioManager : MonoBehaviour
             } else {
                 switch(sound.category) {
                     case Category.MUSIC:
+                        sound.source = musicSource;
                         sound.source.volume = musicVolume;
                         break;
                     case Category.UI: 
@@ -66,6 +85,8 @@ public class AudioManager : MonoBehaviour
         }
 
     }
+
+
 
     // Plays a given sound. Replaces an audiosource's clip.
     public void Play(Sound s) {
@@ -138,12 +159,19 @@ public class AudioManager : MonoBehaviour
 
     
     public Sound GetSound(string name) {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        if(s == null) {
+        try {
+            Sound s = Array.Find(sounds, sound => sound.name == name);
+            return s;
+        } catch (ArgumentNullException ane) {
+            Debug.LogWarning(ane.ToString());
             Debug.LogWarning("Couldn't find Sound " +  name);
+            Debug.LogWarning(sounds.Length);
             return null;
         }
-        return s;
+    }
+
+    public static SoundPlayer GetSoundPlayer(string title){
+            return playerAudio.transform.Find(title + " Player").GetComponent<SoundPlayer>();
     }
 
     private int ErrorCheck(Sound s, bool checkSource, string op) {    
@@ -162,5 +190,45 @@ public class AudioManager : MonoBehaviour
         }
         return status;
     }
+
+    private void autoInstantiate() {
+        if(playerObject == null) {
+            Debug.LogWarning("AudioManager doesn't have the player. Finding...");
+            // We assume that there's a player in the scene.
+            playerObject =  GameObject.FindWithTag("Player");
+        }
+        if (playerObject == null) {
+            Debug.LogWarning("AudioManager couldn't find player object. Attaching to camera.");
+            // If that doesn't work, we attach to the camera.
+            // Assuming that the player won't exist in the title screen
+            playerObject = GameObject.FindWithTag("MainCamera");
+        }
+        if(playerAudio == null) {
+            createPlayerAudio();
+        }
+    }
+    
+
+    // Attaches a PlayerAudio object to the gameobject.
+    private GameObject createPlayerAudio()
+    {
+            Transform playerAudioTransform = null;
+            try {
+                playerAudioTransform = playerObject.transform.Find("Player Audio");
+            } catch (NullReferenceException) {
+                playerAudio = Instantiate(playerAudioPrefab, playerObject.transform);
+
+            }
+
+            // assignPlayerAudio
+            playerAudio = playerAudioTransform.gameObject;
+            musicSource = playerAudioTransform.Find("Music Player").GetComponent<AudioSource>();
+            weaponSource = playerAudioTransform.Find("Weapon Player").GetComponent<AudioSource>();
+            sfxSource = playerAudioTransform.Find("SFX Player").GetComponent<AudioSource>();
+            return playerAudio;
+
+    }
+
+
 
 }

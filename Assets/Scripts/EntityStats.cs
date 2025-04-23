@@ -75,6 +75,7 @@ public class EntityStats : MonoBehaviour
         if (isPlayer)
         {
             lowHPMaterial.SetFloat("_Alpha", 0);
+            soundPlayer = AudioManager.GetSoundPlayer("SFX");
         }
 
         if(soundPlayer == null) {

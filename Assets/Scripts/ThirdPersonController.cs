@@ -63,7 +63,7 @@ public class ThirdPersonController : MonoBehaviour
     private float deathTiltAmount = 70f;
 
     [Header("Sounds")]
-    public SoundPlayer locomotionPlayer;
+    private SoundPlayer locomotionPlayer;
     public double stepDelay = 5f;
     private double stepTimer = .1;
 
@@ -96,6 +96,8 @@ public class ThirdPersonController : MonoBehaviour
         {
             depthOfField.active = false;
         }
+
+        locomotionPlayer = AudioManager.GetSoundPlayer("Locomotion");
 
     }
     IEnumerator FadeToGrayscale(float duration = 1f)

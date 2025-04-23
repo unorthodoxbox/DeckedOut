@@ -19,7 +19,7 @@ public enum Manner {
 public class SoundPlayer : MonoBehaviour
 {
     public AudioSource audioSource;
-    AudioManager audioManager;
+    public static AudioManager audioManager;
     public Manner manner = Manner.FREEZE;
 
     // Time between audio plays
