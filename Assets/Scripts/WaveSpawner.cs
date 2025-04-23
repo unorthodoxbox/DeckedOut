@@ -6,8 +6,10 @@ public class WaveSpawner : MonoBehaviour
 {
     public GameObject enemy;
     public Transform player;
+    public GameObject ammoCrate;
 
     public float spawnRadius = 25f;
+    public float ammoSpawnRadius = 15f;
     public float timeBetweenWaves = 3f;
     public int minEnemies = 5;
     public int moreEnemiesPerWave = 2;
@@ -26,8 +28,8 @@ public class WaveSpawner : MonoBehaviour
     } //Update
 
     //spawns wave based on timeBetweenWaves
-    IEnumerator SpawnWave() 
-    {   
+    IEnumerator SpawnWave()
+    {
         isSpawning = true;
         yield return new WaitForSeconds(timeBetweenWaves);
 
@@ -37,13 +39,21 @@ public class WaveSpawner : MonoBehaviour
         int attempts = 0;
 
         //tries to spawn enemy; will not spawn after several attempts to avoid infinite loop
-        while (spawned < numEnemies && attempts < numEnemies * 5) {
-            if (TryToSpawnOnNavMesh()) {
+        while (spawned < numEnemies && attempts < numEnemies * 5)
+        {
+            if (TryToSpawnOnNavMesh())
+            {
                 spawned++;
                 attempts++;
                 yield return null;
             } //if     
         } //while
+
+        //tries to spawn ammo crate a bunch of times
+        for (int i = 0; i < 10; i++)
+        {
+            SpawnAmmoCrate();
+        } //for
 
         isSpawning = false;
     } //SpawnWave
@@ -70,5 +80,21 @@ public class WaveSpawner : MonoBehaviour
 
         return false;
     } //TryToSpawnOnNavMesh
+
+    void SpawnAmmoCrate()
+    {
+        //makes a spawn location within a ring based on the spawn radius 
+        Vector2 crateOffset = Random.insideUnitCircle.normalized * Random.Range(ammoSpawnRadius * 0.5f, ammoSpawnRadius); 
+        Vector3 targetPosition = player.position + new Vector3(crateOffset.x, 0, crateOffset.y);
+
+        //check NavMesh to see if the spawn location is valid
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(targetPosition, out hit, 5f, NavMesh.AllAreas))
+        {
+            Instantiate(ammoCrate, hit.position, Quaternion.identity);
+            return;
+        } //if
+        return;
+    }
 
 } // WaveSpawner
