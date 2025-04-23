@@ -1562,7 +1562,9 @@ MonoBehaviour:
   spawner: {fileID: 583635243}
   enemy: {fileID: 8574783782633231195, guid: c173bd2b16d2e1a43861bd49f58cba82, type: 3}
   chest: {fileID: 4572411099322874853, guid: 9a259c47041c10e4d96303b4aee29c96, type: 3}
-  ammoCrate: {fileID: 6571628026396929702, guid: 0bdc7ad2de75c4528bb742e106a4a158, type: 3}
+  ammoCrateSmall: {fileID: 5062141338861061109, guid: 72394824ef392b341a130bc2d3876165, type: 3}
+  ammoCrateMed: {fileID: 2620255395876835454, guid: 965760d68767d20498aaa2210f2b0b8f, type: 3}
+  ammoCrateBig: {fileID: 4260943867672710858, guid: 872b84d4db29fe843b850c4d586c7721, type: 3}
   numEnemies: 0
   waveSize: 5
   waveGrowthSize: 5

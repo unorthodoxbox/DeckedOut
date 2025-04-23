@@ -259,6 +259,7 @@ public class ThirdPersonController : MonoBehaviour
         //Handles collisions with types of ammo crates
         
         if (other.gameObject.tag == "AmmoCrateSmall") {
+            //Debug.Log("Small Crate");
             playerStats.totalAmmo += 15;
             if (playerStats.totalAmmo > playerStats.maxClipSize) {
                 playerStats.totalAmmo = playerStats.maxClipSize;
@@ -266,6 +267,7 @@ public class ThirdPersonController : MonoBehaviour
             Destroy(other.gameObject);
         } else if (other.gameObject.tag == "AmmoCrateMed")
         {
+            //Debug.Log("Medium Crate");
             playerStats.totalAmmo += 30;
             if (playerStats.totalAmmo > playerStats.maxClipSize)
             {
@@ -274,6 +276,7 @@ public class ThirdPersonController : MonoBehaviour
             Destroy(other.gameObject);
         } else if (other.gameObject.tag == "AmmoCrateBig")
         {
+            //Debug.Log("Big Crate");
             playerStats.totalAmmo += 60;
             if (playerStats.totalAmmo > playerStats.maxClipSize)
             {

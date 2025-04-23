@@ -21,7 +21,7 @@ public class NavMeshSpawner : MonoBehaviour
             {
 
                 // Offset the Y position by half the height
-                Vector3 spawnPos = randomPos + Vector3.up * (1 / 2f);
+                Vector3 spawnPos = randomPos + Vector3.up * (1 / 3f);
                 Instantiate(prefab, spawnPos, Quaternion.identity);
                 spawned++;
             }

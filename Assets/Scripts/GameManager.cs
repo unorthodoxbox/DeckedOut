@@ -51,7 +51,11 @@ public class GameManager : MonoBehaviour
 
         spawner.SpawnOnNavMesh(chest, numChestsPerWave);
 
-        spawner.SpawnOnNavMesh(RandomAmmoCrate(), numAmmoCratesPerWave);
+        for (int i = 0; i < numAmmoCratesPerWave; i++)
+        {
+            spawner.SpawnOnNavMesh(RandomAmmoCrate(), 1);
+        }
+        
     }
 
     public GameObject RandomAmmoCrate()
