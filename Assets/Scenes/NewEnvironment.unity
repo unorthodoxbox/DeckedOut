@@ -1055,7 +1055,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 8574783782633231195, guid: c173bd2b16d2e1a43861bd49f58cba82, type: 3}
   player: {fileID: 353854464597067268}
+  ammoCrate: {fileID: 3608189048250080574, guid: bd2ab4fbbedd64bc2a03385341b294ef, type: 3}
   spawnRadius: 25
+  ammoSpawnRadius: 15
   timeBetweenWaves: 3
   minEnemies: 5
   moreEnemiesPerWave: 2

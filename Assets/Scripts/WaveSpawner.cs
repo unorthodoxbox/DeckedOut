@@ -36,24 +36,25 @@ public class WaveSpawner : MonoBehaviour
         waveNumber++;
         int numEnemies = minEnemies + (moreEnemiesPerWave * waveNumber);
         int spawned = 0;
-        int attempts = 0;
+        int enemyAttempts = 0;
+        int ammoAttempts = 0;
 
         //tries to spawn enemy; will not spawn after several attempts to avoid infinite loop
-        while (spawned < numEnemies && attempts < numEnemies * 5)
+        while (spawned < numEnemies && enemyAttempts < numEnemies * 5)
         {
             if (TryToSpawnOnNavMesh())
             {
                 spawned++;
-                attempts++;
+                enemyAttempts++;
                 yield return null;
             } //if     
         } //while
 
         //tries to spawn ammo crate a bunch of times
-        for (int i = 0; i < 10; i++)
+        while (!SpawnAmmoCrate() && ammoAttempts < 20)
         {
-            SpawnAmmoCrate();
-        } //for
+            ammoAttempts++;
+        } //while
 
         isSpawning = false;
     } //SpawnWave
@@ -81,7 +82,7 @@ public class WaveSpawner : MonoBehaviour
         return false;
     } //TryToSpawnOnNavMesh
 
-    void SpawnAmmoCrate()
+    bool SpawnAmmoCrate()
     {
         //makes a spawn location within a ring based on the spawn radius 
         Vector2 crateOffset = Random.insideUnitCircle.normalized * Random.Range(ammoSpawnRadius * 0.5f, ammoSpawnRadius); 
@@ -92,9 +93,9 @@ public class WaveSpawner : MonoBehaviour
         if (NavMesh.SamplePosition(targetPosition, out hit, 5f, NavMesh.AllAreas))
         {
             Instantiate(ammoCrate, hit.position, Quaternion.identity);
-            return;
+            return true;
         } //if
-        return;
+        return false;
     }
 
 } // WaveSpawner
