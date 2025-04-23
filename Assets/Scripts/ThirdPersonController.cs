@@ -258,9 +258,25 @@ public class ThirdPersonController : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         //Handles collisions with types of ammo crates
         
-        if (other.gameObject.tag == "AmmoCrateMed") {
-            playerStats.totalAmmo += 20;
+        if (other.gameObject.tag == "AmmoCrateSmall") {
+            playerStats.totalAmmo += 15;
             if (playerStats.totalAmmo > playerStats.maxClipSize) {
+                playerStats.totalAmmo = playerStats.maxClipSize;
+            }
+            Destroy(other.gameObject);
+        } else if (other.gameObject.tag == "AmmoCrateMed")
+        {
+            playerStats.totalAmmo += 30;
+            if (playerStats.totalAmmo > playerStats.maxClipSize)
+            {
+                playerStats.totalAmmo = playerStats.maxClipSize;
+            }
+            Destroy(other.gameObject);
+        } else if (other.gameObject.tag == "AmmoCrateBig")
+        {
+            playerStats.totalAmmo += 60;
+            if (playerStats.totalAmmo > playerStats.maxClipSize)
+            {
                 playerStats.totalAmmo = playerStats.maxClipSize;
             }
             Destroy(other.gameObject);

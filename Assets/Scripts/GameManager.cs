@@ -8,7 +8,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private NavMeshSpawner spawner;
     [SerializeField] private GameObject enemy;
     [SerializeField] private GameObject chest;
-    [SerializeField] private GameObject ammoCrate;
+    [SerializeField] private GameObject ammoCrateSmall;
+    [SerializeField] private GameObject ammoCrateMed;
+    [SerializeField] private GameObject ammoCrateBig;
 
     // Wave mechanics
     public int numEnemies = 0;
@@ -49,6 +51,22 @@ public class GameManager : MonoBehaviour
 
         spawner.SpawnOnNavMesh(chest, numChestsPerWave);
 
-        spawner.SpawnOnNavMesh(ammoCrate, numAmmoCratesPerWave);
+        spawner.SpawnOnNavMesh(RandomAmmoCrate(), numAmmoCratesPerWave);
+    }
+
+    public GameObject RandomAmmoCrate()
+    {
+        int random = Random.Range(0, 3);
+        if (random == 0)
+        {
+            return ammoCrateSmall;
+        } else if (random == 1)
+        {
+            return ammoCrateMed;
+        } else if (random == 2)
+        {
+            return ammoCrateBig;
+        }
+        return ammoCrateSmall;
     }
 }
