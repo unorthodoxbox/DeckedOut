@@ -5848,6 +5848,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 676808459}
     - target: {fileID: 1806510467243792130, guid: 8d9f00bc4e586344fae75c3f7d24a00d, type: 3}
+      propertyPath: currentWeaponIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806510467243792130, guid: 8d9f00bc4e586344fae75c3f7d24a00d, type: 3}
       propertyPath: postProcessingVolume
       value: 
       objectReference: {fileID: 832575518}
