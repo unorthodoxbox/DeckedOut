@@ -49,6 +49,8 @@ public class EntityStats : MonoBehaviour
     public bool makeNoiseOnHurt = false; 
     public bool makeNoiseOnDie = false;
 
+    public int currency = 0;
+
     public SoundPlayer soundPlayer;
     public string prefix; //"<prefix> Hurt"
 
@@ -77,9 +79,13 @@ public class EntityStats : MonoBehaviour
             lowHPMaterial.SetFloat("_Alpha", 0);
             soundPlayer = AudioManager.sfxPlayer.GetComponent<SoundPlayer>();
             prefix = "Player";
-        } 
+        } else
+        {
+            currency = Random.Range(10, 20 + 1); // Set enemy value
+        }
 
-        if(soundPlayer == null) {
+        if (soundPlayer == null)
+        {
             soundPlayer = gameObject.GetComponent<SoundPlayer>();
         }
     }
@@ -94,7 +100,7 @@ public class EntityStats : MonoBehaviour
     public void takeDamage(float damage)
     {
         currHealth -= damage;
-        Debug.Log(gameObject.name + " health is now " + currHealth);
+        //Debug.Log(gameObject.name + " health is now " + currHealth);
         if(!isDead && makeNoiseOnHurt) {
             soundPlayer?.Play(prefix + " Hurt");
         }
@@ -162,6 +168,11 @@ public class EntityStats : MonoBehaviour
         {
             healthBar.SetHealth((int)currHealth);
         }
+    }
+
+    public void AddCurrency(int amount)
+    {
+        currency += amount;
     }
 
 }

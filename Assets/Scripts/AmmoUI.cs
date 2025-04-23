@@ -8,25 +8,30 @@ public class AmmoUI : MonoBehaviour
     private EntityStats playerStats;
 
 
-    public GameObject ammoUI;
+    public TextMeshProUGUI ammoUI;
+    public TextMeshProUGUI currencyUI;
+    public TextMeshProUGUI enemiesRemainingText;
     public Slider waveProgressSlider;
 
     private float ammoInGun;
     private float totalAmmo;
+    private int totalCurrency;
 
-    public int totalEnemies = 6;
-    public int killedEnemies = 0;
+    //public int totalEnemies = 6;
+    //public int killedEnemies = 0;
 
 
     void Awake()
     {
-        //player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         playerStats = player.GetComponent<EntityStats>();
         ammoInGun = playerStats.ammoInGun;
         totalAmmo = playerStats.totalAmmo;
-        ammoUI.GetComponent<TextMeshProUGUI>().text = ammoInGun + "\\" + totalAmmo;
+        totalCurrency = playerStats.currency;
+        //ammoUI.GetComponent<TextMeshProUGUI>().text = ammoInGun + "\\" + totalAmmo;
 
-        waveProgressSlider.maxValue = totalEnemies;
+        //waveProgressSlider.maxValue = totalEnemies;
+        waveProgressSlider.maxValue = GameManager.Instance.waveSize;
         //waveProgressSlider.value = 20;
     }
 
@@ -45,6 +50,13 @@ public class AmmoUI : MonoBehaviour
             }
         }
 
-        waveProgressSlider.value = killedEnemies;
+        if (playerStats.currency != totalCurrency)
+        {
+            totalCurrency = playerStats.currency;
+            currencyUI.GetComponent<TextMeshProUGUI>().text = "$" + totalCurrency;
+        }
+        enemiesRemainingText.text = "Enemies left: " + GameManager.Instance.numEnemies;
+        waveProgressSlider.maxValue = GameManager.Instance.waveSize;
+        waveProgressSlider.value = GameManager.Instance.numEnemies;
     }
 }
