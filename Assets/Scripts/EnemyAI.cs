@@ -96,7 +96,7 @@ public class EnemyAI : MonoBehaviour
                 enemyStats.makeNoiseOnHurt = false;
             }
             GameManager.Instance.playerStats.AddCurrency(enemyStats.currency);
-            //UIObject.GetComponent<AmmoUI>().killedEnemies++;
+            UIObject.GetComponent<AmmoUI>().killedEnemies++;
             GameManager.Instance.UpdateNumEnemies();
             animator.SetTrigger("Die");
             agent.isStopped = true;
