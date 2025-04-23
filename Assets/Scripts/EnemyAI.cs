@@ -97,7 +97,7 @@ public class EnemyAI : MonoBehaviour
             }
             GameManager.Instance.playerStats.AddCurrency(enemyStats.currency);
             //UIObject.GetComponent<AmmoUI>().killedEnemies++;
-            GameManager.Instance.numEnemies--;
+            GameManager.Instance.UpdateNumEnemies();
             animator.SetTrigger("Die");
             agent.isStopped = true;
             GetComponent<Collider>().enabled = false;

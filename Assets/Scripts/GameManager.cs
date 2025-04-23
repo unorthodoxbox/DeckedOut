@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections; // Needed for IEnumerator
 
 public class GameManager : MonoBehaviour
 {
@@ -12,10 +13,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject ammoCrateMed;
     [SerializeField] private GameObject ammoCrateBig;
 
+    public int timeBetweenWaves = 5;
+
     // Wave mechanics
     public int numEnemies = 0;
     public int waveSize = 5;
     public int waveGrowthSize = 5;
+    public int currentWave = 1;
 
     // Chest mechanics
     public int numChestsPerWave = 5;
@@ -34,28 +38,37 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        newWave();
+        StartCoroutine(NewWaveCoroutine()); // Start coroutine instead
     }
+
     public void PlayAgain()
     {
-        // Reload the current scene
         UnityEngine.SceneManagement.SceneManager.LoadScene(
             UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void newWave()
+    private IEnumerator NewWaveCoroutine()
     {
         waveSize += waveGrowthSize;
         numEnemies = waveSize;
-        spawner.SpawnOnNavMesh(enemy, waveSize);
-
-        spawner.SpawnOnNavMesh(chest, numChestsPerWave);
 
         for (int i = 0; i < numAmmoCratesPerWave; i++)
         {
             spawner.SpawnOnNavMesh(RandomAmmoCrate(), 1);
         }
-        
+
+        spawner.SpawnOnNavMesh(chest, numChestsPerWave);
+        Debug.Log("Sleeping before spawning");
+        // Sleep here before spawning enemies
+        yield return new WaitForSeconds(timeBetweenWaves);
+        Debug.Log("Spawning enemies");
+        spawner.SpawnOnNavMesh(enemy, waveSize);
+    }
+
+    public void newWave()
+    {
+        currentWave++;
+        StartCoroutine(NewWaveCoroutine()); // Call coroutine from here too
     }
 
     public GameObject RandomAmmoCrate()
@@ -64,13 +77,23 @@ public class GameManager : MonoBehaviour
         if (random == 0)
         {
             return ammoCrateSmall;
-        } else if (random == 1)
+        }
+        else if (random == 1)
         {
             return ammoCrateMed;
-        } else if (random == 2)
+        }
+        else
         {
             return ammoCrateBig;
         }
-        return ammoCrateSmall;
+    }
+
+    public void UpdateNumEnemies()
+    {
+        numEnemies--;
+        if (numEnemies <= 0)
+        {
+            newWave();
+        }
     }
 }
