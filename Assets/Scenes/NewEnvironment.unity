@@ -2660,6 +2660,7 @@ GameObject:
   - component: {fileID: 802899059}
   - component: {fileID: 802899058}
   - component: {fileID: 802899057}
+  - component: {fileID: 802899061}
   m_Layer: 0
   m_Name: voidFog
   m_TagString: Untagged
@@ -2682,11 +2683,11 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &802899058
@@ -2696,7 +2697,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802899056}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2757,6 +2758,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &802899061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802899056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46c919196be348e4e870981cf061422e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &817155070
 GameObject:
   m_ObjectHideFlags: 0
@@ -6499,6 +6512,10 @@ PrefabInstance:
       propertyPath: postProcessingVolume
       value: 
       objectReference: {fileID: 832575518}
+    - target: {fileID: 3462390818865636079, guid: 8d9f00bc4e586344fae75c3f7d24a00d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4197214360043109400, guid: 8d9f00bc4e586344fae75c3f7d24a00d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.06
