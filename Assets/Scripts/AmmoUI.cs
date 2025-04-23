@@ -55,8 +55,8 @@ public class AmmoUI : MonoBehaviour
             totalCurrency = playerStats.currency;
             currencyUI.GetComponent<TextMeshProUGUI>().text = "$" + totalCurrency;
         }
-        enemiesRemainingText.text = "Enemies left: " + GameManager.Instance.numEnemies;
+        //enemiesRemainingText.text = "Enemies left: " + GameManager.Instance.numEnemies;
         waveProgressSlider.maxValue = GameManager.Instance.waveSize;
-        waveProgressSlider.value = GameManager.Instance.numEnemies;
+        waveProgressSlider.value = waveProgressSlider.maxValue - GameManager.Instance.numEnemies;
     }
 }
