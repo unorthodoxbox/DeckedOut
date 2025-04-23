@@ -44,8 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 907d460a7f43b49b7ab1e6e2c967f835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObject: {fileID: 0}
-  playerAudioPrefab: {fileID: 2065513428823903852, guid: d096437064c084633a91f12a8ec53dac, type: 3}
   music:
   - name: PlayLoop
     source: {fileID: 0}
@@ -61,21 +59,21 @@ MonoBehaviour:
   player:
   - name: Card Collected
     source: {fileID: 0}
-    clip: {fileID: 8300000, guid: 94f284e212f8a4f91984138cbde86e41, type: 3}
+    clip: {fileID: 8300000, guid: b4fd297d4645b4161a0d5c2298326aab, type: 3}
     category: 0
     volume: 0.624
     pitch: 1
     loop: 0
   - name: Player Hurt
     source: {fileID: 0}
-    clip: {fileID: 8300000, guid: 5684d5fe993d0422b8a0ac4c0c5cb34b, type: 3}
+    clip: {fileID: 8300000, guid: c2c3a8d47cb144d20ba81f3fd29e27e6, type: 3}
     category: 0
     volume: 0.591
     pitch: 0.46
     loop: 0
   - name: AR Shot
     source: {fileID: 0}
-    clip: {fileID: 8300000, guid: c6c63d531a84947a7b05f3343f7a9076, type: 3}
+    clip: {fileID: 8300000, guid: ab4e72218ba614fada51ed2d36108816, type: 3}
     category: 0
     volume: 0.542
     pitch: 0.75
@@ -89,28 +87,28 @@ MonoBehaviour:
     loop: 0
   - name: Pistol Shot
     source: {fileID: 0}
-    clip: {fileID: 8300000, guid: af7a29ca9c71543719c4e9ad0b500252, type: 3}
+    clip: {fileID: 8300000, guid: 172a303a0f445446490b286ee1cfba27, type: 3}
     category: 0
     volume: 0.902
     pitch: 1
     loop: 0
   - name: Pistol Reload
     source: {fileID: 0}
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 36c96275128bf4c3b967fe5839bfc58f, type: 3}
     category: 0
     volume: 1
     pitch: 1
     loop: 0
   - name: AR Empty
     source: {fileID: 0}
-    clip: {fileID: 8300000, guid: 8f470e23c92054cb99e2281ac1da82b1, type: 3}
+    clip: {fileID: 0}
     category: 0
     volume: 1
     pitch: 1
     loop: 0
   - name: Pistol Empty
     source: {fileID: 0}
-    clip: {fileID: 8300000, guid: 8f470e23c92054cb99e2281ac1da82b1, type: 3}
+    clip: {fileID: 0}
     category: 0
     volume: 1
     pitch: 1
@@ -124,21 +122,21 @@ MonoBehaviour:
     loop: 0
   - name: Player Step1
     source: {fileID: 0}
-    clip: {fileID: 8300000, guid: 12fc97705183842c1b42bef156111c7d, type: 3}
+    clip: {fileID: 8300000, guid: cfb38def84f464fabb2a7d7f6c49b2a3, type: 3}
     category: 0
     volume: 0.197
     pitch: 0.75
     loop: 0
   - name: Player Step2
     source: {fileID: 0}
-    clip: {fileID: 8300000, guid: f4c52e29bb36d4cec954c548de9be9d8, type: 3}
+    clip: {fileID: 8300000, guid: 4fca587ae0388487987d369a3142c596, type: 3}
     category: 0
     volume: 0.177
     pitch: 0.75
     loop: 0
   - name: Player Jump
     source: {fileID: 0}
-    clip: {fileID: 8300000, guid: 70d5bd728bbdb43b4b66d38765c4c806, type: 3}
+    clip: {fileID: 8300000, guid: 1a354b1a10cdb443295587b9e2bfa1cc, type: 3}
     category: 0
     volume: 1
     pitch: 0.92
@@ -146,49 +144,49 @@ MonoBehaviour:
   sfx:
   - name: Bug Hiss
     source: {fileID: 0}
-    clip: {fileID: 8300000, guid: cfcd98daf610c4da2a281f357e8b0153, type: 3}
+    clip: {fileID: 8300000, guid: 685926e506e6b49d19ea0334ee0579b2, type: 3}
     category: 0
     volume: 1
     pitch: 1
     loop: 0
   - name: Bug Bite
     source: {fileID: 0}
-    clip: {fileID: 8300000, guid: b9936184564434cf794326ff5ad50ed5, type: 3}
+    clip: {fileID: 8300000, guid: 05552e5bb1b1d4d0cbf5090bc3c46335, type: 3}
     category: 0
     volume: 1
     pitch: 1
     loop: 0
   - name: Bug Chomp
     source: {fileID: 0}
-    clip: {fileID: 8300000, guid: a49da61d3d73c46ac930b76604e72162, type: 3}
+    clip: {fileID: 8300000, guid: ee7b2c991946b4e98a5f3ccb408a9484, type: 3}
     category: 0
     volume: 1
     pitch: 1
     loop: 0
   - name: Bug Roar
     source: {fileID: 0}
-    clip: {fileID: 8300000, guid: 4668fe351b14847449505db15f56aa30, type: 3}
+    clip: {fileID: 8300000, guid: b5b3429ba566c4a20a45fef7d34e3992, type: 3}
     category: 0
     volume: 1
     pitch: 1
     loop: 0
   - name: Bug Die
     source: {fileID: 0}
-    clip: {fileID: 8300000, guid: f340f0e47eecb45a381f9fc0a710c38d, type: 3}
+    clip: {fileID: 8300000, guid: 9fe4dab93f5da4f6a8add697e0d6cf4c, type: 3}
     category: 0
     volume: 1
     pitch: 1
     loop: 0
   - name: Bug Hurt
     source: {fileID: 0}
-    clip: {fileID: 8300000, guid: 00eb89bc2d198479fb9cbc72cf6db434, type: 3}
+    clip: {fileID: 8300000, guid: 97ab916c60ffc4ac0a57fa2ae43a8a6b, type: 3}
     category: 0
     volume: 1
     pitch: 1
     loop: 0
   - name: Card Hum
     source: {fileID: 0}
-    clip: {fileID: 8300000, guid: 83481a8bd9fc94077aa71944c46c1ca7, type: 3}
+    clip: {fileID: 8300000, guid: 4e05b034f6711471c85420e1498b0bdf, type: 3}
     category: 0
     volume: 1
     pitch: 1
