@@ -17,12 +17,8 @@ MonoBehaviour:
     weight: 15
   - card: {fileID: 11400000, guid: 4731b68734ebd3048808b3904a04ba4a, type: 2}
     weight: 15
-  - card: {fileID: 11400000, guid: 24e4d4545ba20c4458cdfaf41c24a29f, type: 2}
-    weight: 11
   - card: {fileID: 11400000, guid: 50272cc2beb3640438368cc02de2ee65, type: 2}
     weight: 15
-  - card: {fileID: 11400000, guid: 3cd570c7b2567f642bbff68d52566efb, type: 2}
-    weight: 11
   - card: {fileID: 11400000, guid: 15c85457a70f90e4eb08285a7bc2d2b0, type: 2}
     weight: 11
   - card: {fileID: 11400000, guid: dde38c1299cd1d14b81e3cb30c03775e, type: 2}
