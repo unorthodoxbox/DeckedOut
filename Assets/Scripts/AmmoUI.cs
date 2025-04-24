@@ -55,7 +55,7 @@ public class AmmoUI : MonoBehaviour
             totalCurrency = playerStats.currency;
             currencyUI.GetComponent<TextMeshProUGUI>().text = "$" + totalCurrency;
         }
-        currentWaveText.text = "Wave " + GameManager.Instance.currentWave;
+        //currentWaveText.text = "Wave " + GameManager.Instance.currentWave;
         waveProgressSlider.maxValue = GameManager.Instance.waveSize;
         waveProgressSlider.value = waveProgressSlider.maxValue - GameManager.Instance.numEnemies;
     }

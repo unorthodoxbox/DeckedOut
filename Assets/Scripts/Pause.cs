@@ -16,6 +16,8 @@ public class Pause : MonoBehaviour
 	{
 		if(Time.timeScale == 0f)
 		{
+			Cursor.lockState = CursorLockMode.Locked;
+        	Cursor.visible = false;
 			Time.timeScale = 1f;
             pauseUI.SetActive(false);
 			AudioListener.pause = false;
@@ -24,6 +26,8 @@ public class Pause : MonoBehaviour
 		else
 		{
 			Time.timeScale = 0f;
+			Cursor.lockState = CursorLockMode.None;
+        	Cursor.visible = true;
             pauseUI.SetActive(true);
 			AudioListener.pause = true;
 			return(true);	
