@@ -12,6 +12,10 @@ public class Chest : MonoBehaviour
     public TextMeshProUGUI costText;
     public float showDistance = 3f;
 
+    [Header("Card Spawn")]
+    public GameObject cardObjectPrefab; // Assign your CardObject prefab in Inspector
+    public Transform cardSpawnPoint;    // Optional: set a Transform above chest to spawn card
+
     private Transform playerCamera;
     private EntityStats playerStatsNearby;
 
@@ -47,7 +51,6 @@ public class Chest : MonoBehaviour
                 uiCanvas.SetActive(false);
             }
         }
-        
 
         // Interaction Logic
         if (playerStatsNearby != null && Input.GetKeyDown(KeyCode.E))
@@ -64,15 +67,26 @@ public class Chest : MonoBehaviour
         playerStats.currency -= cost;
         isOpened = true;
 
+        // Get a random card from the loot table
         Card randomCard = dropTable.GetRandomCard();
-        randomCard.ApplyEffect(playerStats);
 
-        Debug.Log($"Player got: {randomCard.cardName}");
+        // Instantiate the card object in the world
+        Vector3 spawnPos = cardSpawnPoint != null ? cardSpawnPoint.position : transform.position + Vector3.up * 1.5f;
+        GameObject cardGO = Instantiate(cardObjectPrefab, spawnPos, Quaternion.identity);
+
+        // Assign the card data to the CardObject component
+        CardObject cardObj = cardGO.GetComponent<CardObject>();
+        if (cardObj != null)
+        {
+            cardObj.cardData = randomCard;
+        }
+
+        Debug.Log($"Spawned card: {randomCard.cardName}");
 
         if (uiCanvas) uiCanvas.SetActive(false);
 
         // Optional: play animation/sound here
-        Destroy(gameObject, 2f);
+        Destroy(gameObject);    
     }
 
     private void OnTriggerEnter(Collider other)

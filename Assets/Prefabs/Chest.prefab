@@ -378,3 +378,5 @@ MonoBehaviour:
   uiCanvas: {fileID: 3254952192055768494}
   costText: {fileID: 6472425557329698104}
   showDistance: 10
+  cardObjectPrefab: {fileID: 4435121925645799528, guid: 194c81bf4ea9d4645949d7d2da443ea0, type: 3}
+  cardSpawnPoint: {fileID: 672182470179025532}
