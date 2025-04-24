@@ -10,7 +10,7 @@ public class AmmoUI : MonoBehaviour
 
     public TextMeshProUGUI ammoUI;
     public TextMeshProUGUI currencyUI;
-    public TextMeshProUGUI enemiesRemainingText;
+    public TextMeshProUGUI currentWaveText;
     public Slider waveProgressSlider;
 
     private float ammoInGun;
@@ -55,7 +55,7 @@ public class AmmoUI : MonoBehaviour
             totalCurrency = playerStats.currency;
             currencyUI.GetComponent<TextMeshProUGUI>().text = "$" + totalCurrency;
         }
-        //enemiesRemainingText.text = "Enemies left: " + GameManager.Instance.numEnemies;
+        currentWaveText.text = "Wave " + GameManager.Instance.currentWave;
         waveProgressSlider.maxValue = GameManager.Instance.waveSize;
         waveProgressSlider.value = waveProgressSlider.maxValue - GameManager.Instance.numEnemies;
     }
