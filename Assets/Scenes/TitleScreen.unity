@@ -15,12 +15,12 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
   m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogColor: {r: 0.44851005, g: 0.2805714, b: 0.6132076, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.1, g: 0.1, b: 0.1, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -1676,7 +1676,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0.38431373, g: 0, b: 0.6, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -1739,7 +1739,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1056868897}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: -0.061628457, y: 0.70441604, z: 0.70441604, w: 0.061628457}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2289,6 +2289,91 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4854348157486079217, guid: a3ac518e065e0334eb7b7448d66c3020, type: 3}
+--- !u!1 &1513460158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1513460160}
+  - component: {fileID: 1513460159}
+  m_Layer: 0
+  m_Name: LightingController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1513460159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513460158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8be29b3b9eefbac4ba392bf28630b81b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DirectionalLight: {fileID: 1056868898}
+  Preset: {fileID: 11400000, guid: 00b3cc0411f77f343bd4aeebd4fb4e35, type: 2}
+  TimeOfDay: 0
+  SunColorGradient:
+    serializedVersion: 2
+    key0: {r: 0.38431373, g: 0, b: 0.6, a: 1}
+    key1: {r: 0.5232265, g: 0.25178, b: 0.7735849, a: 1}
+    key2: {r: 0.6271709, g: 0.59480685, b: 0.9481132, a: 1}
+    key3: {r: 0.7503821, g: 0.735849, b: 1, a: 0}
+    key4: {r: 0.694944, g: 0.6728169, b: 0.9770094, a: 0}
+    key5: {r: 0.627451, g: 0.59607846, b: 0.9490196, a: 0}
+    key6: {r: 0.52156866, g: 0.2509804, b: 0.77254903, a: 0}
+    key7: {r: 0.38431373, g: 0, b: 0.6, a: 0}
+    ctime0: 0
+    ctime1: 9830
+    ctime2: 16384
+    ctime3: 24903
+    ctime4: 40632
+    ctime5: 49151
+    ctime6: 55705
+    ctime7: 65535
+    atime0: 0
+    atime1: 65535
+    atime2: 65535
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: 0
+    m_NumColorKeys: 8
+    m_NumAlphaKeys: 2
+  skyboxMaterial: {fileID: 2100000, guid: 2427a64d5ee36bf43b6c432746084d3f, type: 2}
+  dayAtmosphereThickness: 0.45
+  nightAtmosphereThickness: 0.22
+  daySkyTint: {r: 0.023529412, g: 0.43529412, b: 0.42352942, a: 1}
+  nightSkyTint: {r: 0.2, g: 0, b: 0.7529412, a: 1}
+  dayGroundColor: {r: 0.21606888, g: 0.28226197, b: 0.3915094, a: 0}
+  nightGroundColor: {r: 0.07442599, g: 0.012437706, b: 0.2028302, a: 1}
+  MoonLight: {fileID: 0}
+--- !u!4 &1513460160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1513460158}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -2.800003, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1527461032 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5305517740547240403, guid: a3ac518e065e0334eb7b7448d66c3020, type: 3}
@@ -3241,3 +3326,4 @@ SceneRoots:
   - {fileID: 1592809332}
   - {fileID: 1400969502}
   - {fileID: 2010177355}
+  - {fileID: 1513460160}
