@@ -1667,9 +1667,11 @@ MonoBehaviour:
   ammoCrateSmall: {fileID: 5062141338861061109, guid: 72394824ef392b341a130bc2d3876165, type: 3}
   ammoCrateMed: {fileID: 2620255395876835454, guid: 965760d68767d20498aaa2210f2b0b8f, type: 3}
   ammoCrateBig: {fileID: 4260943867672710858, guid: 872b84d4db29fe843b850c4d586c7721, type: 3}
+  timeBetweenWaves: 5
   numEnemies: 0
   waveSize: 5
   waveGrowthSize: 5
+  currentWave: 1
   numChestsPerWave: 10
   numAmmoCratesPerWave: 20
 --- !u!4 &583635242
@@ -2815,7 +2817,7 @@ MonoBehaviour:
   player: {fileID: 7585835097637955920}
   ammoUI: {fileID: 1822082487}
   currencyUI: {fileID: 501017813}
-  enemiesRemainingText: {fileID: 0}
+  currentWaveText: {fileID: 1094547379}
   waveProgressSlider: {fileID: 52920664}
 --- !u!114 &900117363
 MonoBehaviour:
